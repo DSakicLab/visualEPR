@@ -1,4 +1,5 @@
-![alt text](https://github.com/DSakicLab/visualEPR/blob/main/VisualEPRlogo-cropped.svg?raw=true)
+![alt text](https://github.com/DSakicLab/visualEPR/blob/main/VisualEPRlogo.png?raw=true)
+
 # visualEPR
 # - a multi format spectra viewer, simulator and converter for EPR data
 
