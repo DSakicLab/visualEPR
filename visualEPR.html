@@ -1,0 +1,3258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+  <title>visualEPR</title>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-3.6.3.min.js"   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+    </head>
+
+<style>
+
+.flex-container {
+  background: white;
+  flex-flow: row wrap;
+  justify-content:center;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  list-style: none;
+  align-items: flex-start;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-container-footer {
+  background: white;
+  flex-flow: row wrap;
+  justify-content:left ;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  list-style: none;
+  align-items: flex-end;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-container-row {
+  background: white;
+  flex-flow: row wrap;
+  justify-content:center ;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  list-style: none;
+  align-items: strech;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-container-row2 {
+  background: white;
+  flex-flow: row wrap;
+  justify-content:center ;
+  padding: 10;
+  margin: 0;
+  max-width: 90%;
+  list-style: none;
+  align-items: strech;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nowrap  { 
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.wrap    { 
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}  
+.wrap li {
+<!-- background: gold; -->
+}
+
+.flex-item {
+  margin-left: 10px;
+  margin-right: 20px;
+  min-width: 50px;
+  max-width: 450px;
+  height: auto;
+  position: bottom;
+  color: black;
+  font-size: 1em;
+  text-align: left;
+}
+
+.flex-item-opt {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  margin-left: 10px;
+  margin-right: 20px;
+  min-width: 100px;
+  max-width: 450px;
+  height: 800px;
+  position: left;
+  color: black;
+  font-size: 1em;
+  text-align: left;
+}
+
+.flex-item-footer {
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 50px;
+  max-width: 200px;
+  height: auto;
+  position: bottom;
+  color: black;
+  font-size: 1em;
+  text-align: left;
+}
+
+.flex-item-big {
+  flex-grow: 3;
+  position: top;
+  height: auto;
+  min-width: 500px;
+  max-width: 500px;
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.flex-item-big-footer {
+  flex-grow: 3;
+  position: right;
+  height: auto;
+  min-width: 500px;
+  max-width: 500px;
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.flex-item-title {
+  flex-grow: 3;
+  position: top;
+  padding: 5px;
+  height: auto;
+  min-width: 500px;
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.flex-item-title2 {
+  flex-grow: 0.95;
+  position: top;
+  padding: 5px;
+  height: auto;
+  min-width: 200px;
+  min-height: 400px;
+  color: black;
+  font-size: 1em;
+  text-align: center;
+}
+.flex-item-title3 {
+  position: top;
+  padding: 1px;
+  height: auto;
+  min-width: 500px;
+  color: black;
+  font-size: 1em;
+  text-align: center;
+}
+
+.flex-item-small {
+  padding: 5px;
+  flex-shrink: 3;
+  margin: 10px;
+  position: bottom;
+  color: black;
+  font-size: 2em;
+}
+
+.flex-item-text {
+  padding: 5px;
+  width: 700px;
+  height: auto;
+  margin: 10px;
+  position: bottom;
+  color: black;
+  text-align: justify;
+}
+
+.flex-item-auto {
+  padding: 5px;
+  width: auto;
+  height: auto;
+  margin: 10px;
+  position: bottom;
+  color: black;
+  text-align: justify;
+}
+
+.header {
+  background: #f1f1f1;
+}
+
+.file-selector {
+  width: 100px;
+  height: 40px;
+  background-color: rgba(55, 93, 157, 0.1);
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 20px;
+    
+    color: #555;
+    border: 2px dashed #555;
+    border-radius: 7px;
+    cursor: default;
+}
+
+.file-selector1 {
+  width: auto;
+  min-width: 200px;
+  height: 400px;
+background-color: rgba(55, 93, 157, 0.1);
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+    padding: 50px 50px;
+    color: #555;
+    border: 2px dashed #555;
+    border-radius: 7px;
+    cursor: default;
+}
+
+
+.file-selector.hover
+{
+    color: #f00;
+    border-color: #f00;
+    border-style: solid;
+    box-shadow: inset 0 3px 4px #888;
+}
+
+.file-selector1.hover
+{
+    color: #f00;
+    border-color: #f00;
+    border-style: solid;
+    box-shadow: inset 0 3px 4px #888;
+}
+
+.header {
+  background: white;
+}
+
+.content {
+  padding: 0px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-left: -5px;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
+.top-container {
+  background-color: #f1f1f1;
+}
+    
+a {
+        text-decoration: none;
+  }
+
+a:active {
+        color: blue;
+      }
+
+ a:hover {
+     color: black;
+}
+
+.button {
+  background-color: #e7e7e7; 
+  border: none;
+  color: black;
+  padding: 10px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+ font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-family: "Poppins", sans-serif;
+  color:#333333;
+  font-weight: 300;
+}
+
+h1 { font-size: 64px; line-height: 1.15; margin-bottom: 0.2em; }
+h2 { font-size: 36px; line-height: 1.45; margin-bottom: 0.6em; }
+h3 { font-size: 28px; line-height: 1.6; margin-bottom: 0.4em; }
+h4 { font-size: 48px; line-height: 1.6; margin-bottom: 0.8em; }
+h5 { font-size: 20px; line-height: 1.6; margin: 0.2em; }
+h6 { font-size: 18px; line-height: 1.6; margin: 0em; }
+
+h1 small { font-size: 18px; font-weight: 300;}
+h2 small { font-size: 16px; font-weight: 300;}
+h3 small { font-size: 14px; font-weight: 300;}
+h4 small { font-size: 12px; font-weight: 300;}
+
+hr {
+  background-color: #e5e5e5;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0;
+  height: 1px;
+  margin: 2px 0;
+}
+
+.footer {
+    font-family: "Poppins", sans-serif;
+    text-align: right;
+    margin: 0 auto;
+    padding: 25px 0;
+    background-color: #191b29;
+    color: #fff;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+    padding: 20px 0 18px 0;
+}
+
+.footer a {
+  color: #ffffff;
+  opacity: 0.6;
+  -webkit-transition: all 200ms  linear;
+  -moz-transition: all 200ms  linear;
+  transition: all 200ms  linear;
+}
+.footer a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 25px;
+  height: 2px;
+  background-color: #333;
+  margin: 2px 0;
+  transition: 0.4s;
+}
+
+/* Rotate first bar */
+.change .bar1 {
+  transform: translate(0, 8px) rotate(-90deg);
+}
+
+/* Fade out the second bar */
+.change .bar2 {opacity: 0;}
+
+/* Rotate last bar */
+.change .bar3 {
+  transform: translate(0, -8px) rotate(45deg);
+}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: 'white';
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    border: 2px dashed #555;
+    border-radius: 7px;
+  background-color: white;
+  overflow: hidden;
+}
+
+</style>
+<div class="top-container">
+  <a href="http://www.hrzz.hr" target="_blank"><h6>&nbsp;&nbsp;&nbsp;&nbsp;Croatian Science Foundation Installation Grant</a><a href="http://sw.pharma.hr/light-n-ring" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;LIGHT-N-RING&nbsp;&nbsp;&nbsp;&nbsp;UIP 2020-02-4857&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
+</div>
+</head><br>
+<div class="header" id="myHeader">
+    <br>
+    <ul class="flex-container wrap">
+      <li class="flex-item-title">
+        <div>
+        <img src="VisualEPRlogo.svg" alt="<h1>visualEPR</h1>" height=300></a>
+        </div>
+      </li>
+      <li class="flex-item-title">
+             <div style="float:center"> <h3>Powered by: <br></h3><a href="http://www.hrzz.hr" target="_blank"><img src="hrzz_logo.png" alt="HRZZ" height=80></a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://sw.pharma.hr/light-n-ring" target="_blank"><img src="logo_txt.png" alt="LIGHT-N-RING" height=60></a><h2><a href="https://www.eprsimulator.org" target="_blank">EPRsimulator</a></h2></div>
+      </li>
+    </ul>
+    <hr>
+</div>
+
+
+
+<div class="content">
+
+  <ul class="flex-container-row wrap">
+
+<li class="flex-item">
+
+<div id="introTxt">
+    <p style="padding:10px;line-height: 1.6">
+  <h3> INTRODUCTION </h3>
+  This is a web-based implementation for visualisation and analysis of EPR spectra. <br>
+  This software is predominatelly for fast overview visualization of spectra and basic analysis.<br> Example can be found here for <a href="example.ASCII" target="_blank">ASCII </a>file. For <a href="example.DTA" target="_blank">.DTA</a>, <a href="example.DSC" target="_blank">.DSC</a>, and <a href="example.YGF" target="_blank">.YGF<a> file follow the links.<br> 
+  <h3> CREDITS </h3> This software was developed by <a href="https://scholar.google.com/citations?hl=en&user=BBURjcwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Davor Šakić</a>, Erim Bešić, and Gabrijel Zubčić. Simulation code was developed by <a href="https://www.york.ac.uk/chemistry/staff/academic/a-c/vchechik/" target="_blank">Victor Chechik</a> and can be found at <a href="https://www.eprsimulator.org" target="_blank">EPRsimulator</a>. Help from Valerije Vrček (discussion and testing) is greatly appreciated.<br>
+  Funding: <a href="http://www.hrzz.hr" target="_blank">HRZZ</a>, <a href="http://light-n-ring.pharma.hr" target="_blank">LIGHT-N-RING</a>, 2023.<br>
+  Institution: <a href="http://www.pharma.unizg.hr" target="_blank">University of Zagreb, Faculty of Pharmacy and Biochemistry<br><br>
+  <img src="logo_fbf_unizg.png" alt="FBF UniZg" height=80></a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="http://www.hrzz.hr" target="_blank"><img src="hrzz_logo.png" alt="HRZZ" height=80></a>
+  <br><br> 
+  <h3> DISCLAIMER </h3> The software and results are provided "AS IS", without warranty of any kind, express or implied. In no event shall the authors or copyright holders be liable for any claim, damages or other liability. Good luck!
+    </p>
+</div>
+</li>
+
+<li class="flex-item-title2">
+    <br>
+    <br>
+    <h3>VIEWER</h3>
+    <div id="big_input"> <input type="file" class="file-selector1" accept=".ASCII,.txt" id='inputfile' onchange="hide('big_input');hide('introTxt');show('introTxt1');show('graphDiv');show('manip_opt');readfile();" text="">
+    </div>
+    <div id="graphDiv"  style="display: none;"></div>
+
+    <div id="manip_opt" style="display: none;">
+    <ul class="flex-container-row2">
+<li class="flex-item">
+      <button class="button" id="resetannot" onclick="resetAnnot()" >Reset Annot. </button>
+</li>
+<li class="flex-item">
+<button class="button" id="replot" onclick="replot()" >Replot</button>
+</li>
+<li class="flex-item">
+<button class="button" id="removelast" onclick="removelast()" >Remove last trace</button>
+</li>
+<li class="flex-item">
+<button class="button" id="removefirst" onclick="removefirst()" >Remove first trace</button>
+</li>
+<li class="flex-item">
+<button class="button" id="resample" onclick="resample()" >Resample to 1024</button>
+</li>
+<li class="flex-item">
+<button class="button" id="overlap" onclick="showhide('overlapinp');overlap()" >Overlap/panorama</button> <br>
+<a href onclick="alert('Distance between individual traces'); return false;">
+<div id='overlapinp' name="ovelapinp" style="display: none;">
+<label for="panorama">&nbsp;&nbsp;Offset &nbsp;&nbsp;</label></a><input type="number" name="panorama1" id="panorama1" value="0.0" step="0.1" style="width: 40px;" onchange="overlap1()" /><br>
+<!-- 
+&nbsp;<button class="button" id="plot3d" onclick="make3d()">&nbsp;&nbsp;Make 3D plot</button><br>
+-->
+<button class="button" id="replot" onclick="replot()" >Replot</button><br><br>
+</div>
+</li>
+<li class="flex-item">
+<button class="button" id="reload" onclick="window.location.reload(true);">Refresh page</button>
+</li>
+    </ul>
+    </div>
+
+    <div id="graphDiv1"  style="display: none;"></div>
+</p>
+</li>
+
+
+<div id="input_eprparam_old" style="display: none">
+<a href="#input_stuff" onclick="hidename('inputbox',0);showhide('eprparam_box')">
+<h3>EPR PARAMETERS</h3></a>
+<div name="inputbox" id="eprparam_box" style="display: none;"><br>Constants and EPR parameters.<br>Instrument and experiment specific data <br>can be found in eg. Bruker's .DSC file<br><br>
+<input type="number" id="h" value="6.626069e-34" /> <label for="h">&nbsp;&nbsp;Planck const.</label><br />
+<input type="number" id="mu" value="9.274010e-28" /> <label for="mu">&nbsp;&nbsp;Bohr magneton</label><br />
+<input type="number" id="ge" value="2.0023" /> <label for="ge">&nbsp;&nbsp;g free electron</label><br />
+</div>
+</div>
+
+
+<!--
+<span class="container" onclick="myFunction(this)">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</span>
+  -->
+
+<li class="flex-item-opt">
+<br><br>
+<div id="input_stuff">
+
+<div class="accordion">
+<a href="#input_stuff" onclick="hidename('inputbox',1);showhide('eprspectra_input_param')"> 
+<h3>LOAD EPR SPECTRA</h3></a></div>
+
+<div name="inputbox" id="eprspectra_input_param" style="display: none;">
+<div id="openinputs" class="container" onclick="myFunction(this)">
+<a href="#input_stuff" onclick="showhide('inputs');hide('inputJEOL');hide('inputsBruker');hide('inputMTXML');hide('inputJSON');hide('inputsBrukerOLD')">
+<h5>&nbsp;&nbsp;&nbsp;ASCII</h5></a>
+</div>
+<div id="inputs" style="display: none" class="panel">
+<br>
+&nbsp;&nbsp;&nbsp;<input type="number" name="freq" id="freq" style="display: none;">
+<label for="freqGHz">&nbsp;&nbsp;Frequency (GHz) </label>
+<!--
+<input type="number" id="freqGHz" name="freqGHz" value="9.867769" step="0.001" min="8" max="12" onchange="hide('big_input');show('graphDiv');hide('introTxt');show('introTxt1');readfile()" /> <br /><br>
+-->
+&nbsp;&nbsp;&nbsp;<input type="number" id="freqGHz" name="freqGHz" value="9.867769" step="0.001" min="8" max="12" /> <br /><br>
+&nbsp;&nbsp;&nbsp;<a href onclick="alert('Current format is [index] [fied(G)] [value/intensity(a.u.)] seperated by whitespaces, with the first two rows as description. More formats will be available in due course'); return false;"><label for="input">.ASCII or .txt FILE</label><br></a>
+<!--
+<input type="file" class="file-selector" accept=".ASCII,.txt" id='inputfile2' onchange="hide('big_input');show('graphDiv');hide('introTxt');show('introTxt1');readfile2();"><br>
+-->
+&nbsp;&nbsp;&nbsp;<input type="file" class="file-selector" accept=".ASCII,.txt" id='inputfile2'><br>
+<br>
+&nbsp;&nbsp;&nbsp;<button class="button" id="read_ASCII" onclick="readfile2();" >&nbsp;&nbsp;LOAD FILES</button><br><br>
+</div>
+
+<div id="openinputs1">
+<a href="#input_stuff" onclick="hide('inputJEOL');hide('inputsBrukerOLD');hide('inputs');hide('inputMTXML');hide('inputJSON');showhide('inputsBruker')">
+<h5>&nbsp;&nbsp;&nbsp;BES<sup>3</sup>T</h5></a>
+</div>
+<div id="inputsBruker" style="display: none"><br>
+<label for="inputfileDSC">.DSC FILE</label><br>
+<input type="file" class="file-selector" accept=".dsc,.DSC" id='inputfileDSC' ><br><br>
+<label for="inputfileDTA">.DTA FILE</label><br>
+<input type="file" class="file-selector" accept=".dta,.DTA" id='inputfileDTA' ><br><br>
+<label for="inputfileYGF">.YGF FILE</label><br>
+<input type="file" class="file-selector" accept=".ygf,.YGF" id='inputfileYGF' ><br><br>
+<button class="button" id="read_DSC_DTA" onclick="readfileDSC();" >&nbsp;&nbsp;LOAD FILES</button><br>
+</div>
+
+
+<div id="openinputs2">
+<a href="#input_stuff" onclick="hide('inputJEOL');hide('inputsBruker');hide('inputs');hide('inputMTXML');hide('inputJSON');showhide('inputsBrukerOLD')">
+<h5>&nbsp;&nbsp;&nbsp;PAR/SPC</h5></a>
+</div>
+<div id="inputsBrukerOLD" style="display: none"><br>
+<label for="inputfilePAR">.PAR FILE</label><br>
+<input type="file" class="file-selector" accept=".par,.PAR" id='inputfilePAR' ><br><br>
+<label for="inputfileSPC">.SPC FILE</label><br>
+<input type="file" class="file-selector" accept=".sec,.SEC,.spc,.SPC" id='inputfileSPC' ><br><br>
+<!--
+<label for="inputfileYGF">.YGF FILE</label><br>
+<input type="file" class="file-selector" accept=".ygf,.YGF" id='inputfileYGFold' ><br><br>
+-->
+<button class="button" id="read_PAR_SPC" onclick="readfilePAR();" >&nbsp;&nbsp;LOAD FILES</button><br>
+</div>
+
+<div id="openinputs3">
+<a href="#input_stuff" onclick="hide('inputsBruker');hide('inputs');hide('inputsBrukerOLD');hide('inputMTXML');hide('inputJSON');showhide('inputJEOL')">
+<h5>&nbsp;&nbsp;&nbsp;JEOL</h5></a>
+</div>
+<div id="inputJEOL" style="display: none"><br>
+<label for="inputfileJEOL">JEOL FILE</label><br>
+<input type="file" class="file-selector" id='inputfileJEOL' ><br><br>
+<button class="button" id="read_JEOL" onclick="readfileJEOL();" >&nbsp;&nbsp;LOAD FILES</button><br>
+</div>
+
+
+<div id="openinputs4">
+<a href="#input_stuff" onclick="hide('inputsBruker');hide('inputs');hide('inputsBrukerOLD');hide('inputJEOL');hide('inputJSON');showhide('inputMTXML')">
+<h5>&nbsp;&nbsp;&nbsp;XML</h5></a>
+</div>
+<div id="inputMTXML" style="display: none"><br>
+<label for="inputfileMTXML">MAGNETTECH</label><br>
+<input type="file" class="file-selector" id='inputfileMTXML' accept=".XML"><br><br>
+<button class="button" id="read_MTXML" onclick="readfileMTXML();" >&nbsp;&nbsp;LOAD FILES</button><br>
+</div>
+
+<div id="openinputs5">
+<a href="#input_stuff" onclick="hide('inputsBruker');hide('inputs');hide('inputsBrukerOLD');hide('inputJEOL');showhide('inputJSON')">
+<h5>&nbsp;&nbsp;&nbsp;JSON</h5></a>
+</div>
+<div id="inputJSON" style="display: none"><br>
+<label for="inputfileJSON">ADANI</label><br>
+<input type="file" class="file-selector" id='inputfileJSON' accept=".JSON,.json"><br><br>
+<button class="button" id="read_JSON" onclick="readfileJSON();" >&nbsp;&nbsp;LOAD FILES</button><br>
+</div>
+
+</div>
+
+<div class="accordion">
+<a href="#input_stuff" onclick="hidename('inputbox',2);showhide('spectraoptions_param')">
+<h3>PROCESSING</h3></a></div>
+<div name="inputbox" id="spectraoptions_param" style="display: none;">
+
+<a href="#input_stuff" onclick="hidename('process',0),showhide('processoptions')">
+<h5>&nbsp;&nbsp;OPTIONS</h5></a>
+<div id='processoptions' name="process" style="display: none;">
+
+</div><br>
+
+<a href="#input_stuff" onclick="hidename('process',1),showhide('baselinecorrdiv')">
+<h5>&nbsp;&nbsp;BASELINE</h6></a>
+<div id="baselinecorrdiv" name="process" style="display: none;">
+  <h6>&nbsp;&nbsp;Apply to last trace:</h5>
+<button class="button" id="baselinecorr" onclick="baselineFunc()" >&nbsp;&nbsp;&nbsp;Baseline correction</button><br>
+<button class="button" id="normalize" onclick="normalizeFunc()" >&nbsp;&nbsp;&nbsp;Normalize</button><br>
+<br>
+</div>
+<a href="#input_stuff" onclick="hidename('process',2),showhide('filtering')">
+<h5>&nbsp;&nbsp;FILTERING</h6></a>
+<div id="filtering" name="process" style="display: none;">
+<a href onclick="alert('Number of points included in moving average smoothing'); return false;">
+<label for="smooth">&nbsp;&nbsp;Moving average&nbsp;&nbsp;</label></a><input type="number" name="smooth" min="1" value="5" step="1" max="21" /><br>
+<a href onclick="alert('Number of points included in Savitzky-Golay smoothing'); return false;">
+<label for="smooth">&nbsp;&nbsp;Savitzky-Golay&nbsp;&nbsp;</label></a><input type="number" name="smoothSAVGOL" min="5" value="5" step="2" max="21" /><br>
+<a href onclick="alert('Percentage from baseline that can be ignored'); return false;">
+<label for="noise">&nbsp;&nbsp;Noise reduction&nbsp;&nbsp;</label></a><input type="number" name="noise" value="0.04" min="0.00" max="0.2" step="0.01" /><br>
+    <h6>&nbsp;&nbsp;Apply to last trace:</h6>
+<button class="button" id="movingavg" onclick="movingavgFunc()" >&nbsp;&nbsp;&nbsp;Moving average</button><br>
+<button class="button" id="savgol" onclick="savgolFunc()" >&nbsp;&nbsp;&nbsp;Savitzky-Golay</button><br>
+<button class="button" id="noisecan" onclick="noisecanFunc()" >&nbsp;&nbsp;&nbsp;Noise reduction</button><br>
+<br>
+</div>
+<a href="#input_stuff" onclick="hidename('process',3),showhide('integderiv')">
+<h5>&nbsp;&nbsp;INTEG/DERIV</h6></a>
+<div id="integderiv" name="process" style="display: none;">
+    <h6>&nbsp;&nbsp;Apply to last trace:</h6>
+<button class="button" id="derivations" onclick="derivFunc()" >&nbsp;&nbsp;&nbsp;1st derivation</button><br>
+<button class="button" id="integration" onclick="integFunc()" >&nbsp;&nbsp;&nbsp;1st integration</button><br>
+</div>
+<br>
+<a href="#input_stuff" onclick="hidename('process',4),showhide('tracemanipu')">
+<h5>&nbsp;&nbsp;MANIPULATION</h5></a>
+<div id='tracemanipu' name="process" style="display: none;">
+<button class="button" id="resetannot" onclick="resetAnnot()" >Reset Annot.</button><br>
+<button class="button" id="replot" onclick="replot()" >Replot</button> <br>
+<button class="button" id="removelast" onclick="removelast()" >Remove last trace</button> <br>
+<button class="button" id="removefirst" onclick="removefirst()" >Remove first trace</button> <br>
+<button class="button" id="resample" onclick="resample()" >Resample to 1024</button> <br>
+<button class="button" id="overlap" onclick="showhide('overlapinp');overlap()" >Overlap/panorama</button> <br>
+<a href onclick="alert('Distance between individual traces'); return false;">
+<div id='overlapinp' name="ovelapinp" style="display: none;">
+<label for="panorama">&nbsp;&nbsp;Offset &nbsp;&nbsp;</label></a><input type="number" name="panorama" id="panorama" value="0.0" step="0.1" style="width: 40px;" onchange="overlap()" /><br>
+<!--
+&nbsp;<button class="button" id="plot3d" onclick="make3d()">&nbsp;&nbsp;Make 3D plot</button><br>
+-->
+<button class="button" id="replot" onclick="replot()" >Replot</button><br><br>
+</div>
+<button class="button" id="selecttrace" onclick="showhide('traces');selecttraces()">Select trace</button><br>
+<div id='traces' name="traces" style="display: none;"></div>
+<button class="button" id="reload" onclick="window.location.reload(true);">Refresh page</button><br>
+</div>
+</div>
+
+<div class="accordion">
+<a href="#input_stuff" onclick="hidename('inputbox',3);showhide('eprsim_param')">
+<h3>SIMULATION</h3></a></div>
+<div name="inputbox" id="eprsim_param" style="display: none;">
+<!--<br>EPR simulation powered by <br><a href="www.eprsimulator.org" target="_blank">eprsimulator.org</a> engine <br>developed by Victor Chechik<br><br> -->
+<a href="#input_stuff" onclick="showhide('maneprinput');hide('texteprinput');hide('vizeprinput')">
+<h5>&nbsp;MANUAL INPUT</h5></a>
+<div id='maneprinput'  style="display: none;">
+<a href onclick="alert('Set before simulation. If not, frequency from load input panel is used.'); return false;">
+<label for="freqGHz2">&nbsp;&nbsp;Frequency (GHz) </label></a>
+<input type="number" id="freqGHz2" name="freqGHz" placeholder="9.5" step="0.001" min="9.2" max="11" /> <br />
+<label for="freqGHz2">&nbsp;&nbsp;intensity a.u. </label>
+<input type="number" id="intensity" name="intensity" value=1 step="0.1" min="0" style='max-width:50px' onchange="eprsim()"> <br />
+<br><br>
+<button class="button" id="addcomp" onclick="addcomp();eprsim()">Add radical</button><br>
+<button class="button" id="removecomp" onclick="removecomp();eprsim()">Remove radical</button><br>
+<div id="simparam" ></div>
+</div>
+<br>
+<a href="#input_stuff" onclick="showhide('texteprinput');hide('vizeprinput');hide('maneprinput')">
+<h5>&nbsp;TEXT INPUT</h5></a>
+<div id="texteprinput" style="display: none;">
+&nbsp;&nbsp;Frequency (GHz) <input type="number" id="freqGHz3" name="freqGHz" placeholder="9.5" step="0.001" min="9.2" max="11" /> <br />
+<textarea name="eprsiminp" id="eprsiminp" cols="25" rows="7">
+[{"percent": 35,   
+"g": "2.008714",
+"equiv": ["1","1"],
+"hfc": ["1.8", "13.8"],
+"spin": ["0.5", "1"],
+"lor": "100",
+"width": "0.5"
+},{"percent": 65,   
+"g": "2.009184",
+"equiv": ["1"],
+"hfc": ["8"],
+"spin": ["1"],
+"lor": "100",
+"width": "0.7"
+}]
+</textarea><br>
+<button class="button" id="eprsim" onclick="eprsim();"><a href=#graphDiv>EPR SIMULATION</a></button>
+</div>
+<br>
+<a href="#input_stuff" onclick="showhide('vizeprinput');hide('texteprinput');hide('maneprinput')">
+<h5>&nbsp;ABS/INTEG</h5></a>
+<div id="vizeprinput" style="display: none;">
+<br>
+<button class="button" id="abspec" onclick="abspec()" >Absorption spectra</button><br>
+<button class="button" id="doublint" onclick="doublint()" >Second integral</button>
+</div>
+</div>
+
+<div class="accordion">
+<a href="#input_stuff" onclick="hidename('inputbox',4);showhide('export_options')">
+<h3>EXPORT</h3></a></div>
+<div name="inputbox" id="export_options" style="display: none">
+  <br>
+<a href="#input_stuff" onclick="showhide('graph_options')">
+<h5>&nbsp;&nbsp;&nbsp;GRAPH</h5></a>
+<div id='graph_options' style="display: none"><br>
+
+<label class="radio">
+SVG
+<input type="radio" checked="checked" id="svg" name="PICtype" value="svg">
+<span class="checkmark"></span>
+</label><br>
+<label class="radio">
+PNG
+<input type="radio" id="png" name="PICtype" value="png">
+<span class="checkmark"></span>
+</label><br>
+
+Height:&nbsp;&nbsp;<input type="number" id="PICheight" value="600" /> <br />
+Width:&nbsp;&nbsp;<input type="number" id="PICwidth" value="600" /> <br />
+Scale:&nbsp;&nbsp;<input type="number" id="PICscale" value="4" /> <br />
+Filename:&nbsp;&nbsp;<input type="text" id="filename_graph" name="filename_graph" value='epr_spectra' /> <br />
+<br>
+<label for="legend_show">Show legend&nbsp;&nbsp;</label><input type="checkbox" id="legend_show" checked=true><br>
+<br>
+<button class="button" id="downloadgraph" onclick="dwngraph()">Download graph</button> 
+<br>
+</div>
+<br>
+<a href="#input_stuff" onclick="showhide('data_options')">
+<h5>&nbsp;&nbsp;&nbsp;DATA</h5></a>
+<div id='data_options' style="display: none">
+<br>
+Filename:&nbsp;&nbsp;
+<input type="text" id="filename" name="filename" value='output_epr' /> <br /><br>
+<button class="button" id="downloaddata" onclick="downloadData()">Download data</button> 
+<br>
+<br>
+<div id='demo' style="display:none"></div>
+</div>
+</li>
+
+</ul>
+
+</div>
+
+
+<script>
+
+
+function myFunction(x) {
+  x.classList.toggle("change");
+}
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+})
+}
+
+function base64toFloat(num){
+//const base64Str = num; // Base64 string representing a float64 number
+const binaryStr = atob(num); // Decode base64 string to binary string
+const buffer = new ArrayBuffer(8); // Create an ArrayBuffer with 8 bytes (float64 size)
+const view = new DataView(buffer); // Create a DataView to read/write bytes
+
+// Write the bytes from binary string into the buffer using DataView
+for (let i = 0; i < 8; i++) {
+  view.setUint8(i, binaryStr.charCodeAt(i));
+}
+
+// Read the float64 number from the buffer using DataView
+const float64Arr = new Float64Array(buffer);
+const decodedNum = float64Arr[0]; // Get the decoded float64 number
+//console.log(decodedNum);
+return decodedNum; // Output: 2.718281828459045
+
+}
+
+function readfileJSON() {
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var inputAdani = JSON.parse(fileReader.result);
+    //console.log(inputAdani);
+    var freq = inputAdani.MwFrequencyKHz*1000;
+    var phase_angle = inputAdani.PhaseRadians;
+    var names = [inputAdani.ExperimentOptions.ExperimentName+" sum"];
+    //var num2Dpoint = inputAdani.ExperimentOptions.Count2D;
+    var num2Dpoint = 1;
+    var centerfield = inputAdani.ExperimentOptions.CommonOptions.CenterMagneticField*10;
+    var sweep = inputAdani.ExperimentOptions.CommonOptions.SweepWidth*10;
+    var points = inputAdani.ExperimentOptions.CommonOptions.PointsCount;
+    var xmin = centerfield - (sweep/2);
+    var array_x = [];
+    var array_y = [];
+    array_y[0] = [];
+    //array_y[1] = [];
+    //array_y[2] = [];
+    for (i=0;i<points;i++){
+      array_x.push(xmin+i*(sweep/(points-1)));
+      //array_y[0].push(inputAdani.Values[0].Values[i].Points[0]);
+      //array_y[1].push(inputAdani.Values[0].Values[i].Points[1]);
+      array_y[0].push(inputAdani.Values[0].Values[i].Points[1]*Math.sin(phase_angle)+inputAdani.Values[0].Values[i].Points[0]*Math.cos(phase_angle));
+    }
+
+console.log(array_x);
+reportData(array_x,array_y,freq,names,num2Dpoint);
+  }
+  fileReader.readAsText(document.querySelector('#inputfileJSON').files[0]);
+}
+
+
+function readfileMTXML() {
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var lines = fileReader.result.split("\n").filter(line => line.trim() !== "").filter(line => !line.startsWith("*")).filter(line => !line.startsWith("#"));
+    //console.log(lines);
+    var curvesRaw = [];
+     for (var i=0;i<lines.length;i++){
+      //console.log(lines[i]);
+      var tip = lines[i].trim().split(/\s+/);
+      var tipall = []
+      if (tip[0].startsWith('<Measurement')) {
+        tip.shift();
+        for (j=0;j<tip.length;j++){
+        var tip1 = tip[j].replace(/['"]+/g, '').split('=');
+        tipall.push([tip1[0],tip1[1]]);
+        }
+        var mtxml_param = Object.fromEntries(tipall);
+      }
+      if (tip[tip.length-1].endsWith('</Curve>')) {
+        var curve = [];
+        for (j=0;j<tip.length;j++){
+          curve.push(tip[j].trim().replace(/>+/g, ' ').replace(/<+/g, ' ').trim().split(/\s+/));
+        }
+        curvesRaw.push(curve);
+      }
+    }
+    //console.log(curvesRaw);
+    var data = [];
+    for (k=0;k<curvesRaw.length;k++){
+      var tipall = [];
+      for (n=1;n<curvesRaw[k].length-1;n++){
+        var test = curvesRaw[k][n];
+        var tip = test[0].replace(/['"]+/g, '').split('=');
+        tipall.push([tip[0],tip[1]]);
+      }
+      var curveparam = Object.fromEntries(tipall);
+      //console.log(curveparam);
+      var datapointsRaw = curvesRaw[k][curvesRaw[k].length-1][1];
+      var datapointsRawsplit = datapointsRaw.split('=');
+      //console.log(datapointsRawsplit);
+      var datapoints = [];
+      for (m=0;m<datapointsRawsplit.length;m++){
+        datapoints.push(base64toFloat(datapointsRawsplit[m]));
+      }
+      //console.log(datapoints);
+      data.push({param:curveparam,datapoints:datapoints});
+    }
+    //console.log(mtxml_param);
+    console.log(mtxml_param);
+    console.log(data);
+    var names = [mtxml_param.Name];
+    var num2Dpoint = 1;
+    var freq = Number(mtxml_param.MwFreq)*1000000000;
+    var xaxis_name = mtxml_param.XDatasource;
+    var yaxis_name = mtxml_param.YDatasource;
+    var xaxis_data_all = [];
+    var yaxis_data = [];
+    for (l=0;l<data.length;l++){
+      if(data[l].param.YType == xaxis_name){
+        xaxis_data_all = data[l].datapoints;
+        xaxis_data_all.pop();
+      }
+      if(data[l].param.YType == yaxis_name){
+        yaxis_data = data[l].datapoints;
+        yaxis_data.pop();
+      }      
+    }
+    var xmin = xaxis_data_all[0];
+    var xmax = xaxis_data_all[xaxis_data_all.length-1];
+    var xpts = yaxis_data.length-1;
+    var step = (xmax-xmin)*10/xpts;
+    var array_x = [];
+    for (t=0;t<xpts;t++){
+      array_x.push(xmin*10+step*t);
+    }
+    var array_y = [yaxis_data];
+    //console.log(freq);
+reportData(array_x,array_y,freq,names,num2Dpoint);
+  }
+  fileReader.readAsText(document.querySelector('#inputfileMTXML').files[0]);
+}
+
+
+function readfileJEOL(){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var array_x = [];
+    var freq;
+    var title;
+    var num2Dpoint = [];
+    //console.log("DOS JEOL");
+    var data = new Int16Array(fileReader.result);
+    var view = new DataView(data.buffer);
+    let floats = [];
+    var array_y = [];
+    let asciiData = '';
+    for (let i=7158;i<7168;i ++){
+    const byte = view.getUint8(i);
+    asciiData += String.fromCharCode(byte);
+    //var nospec = view.getInt32(i,true);
+    }
+    let asciiData1 = '';
+    for (let i=16;i<32;i ++){
+    const byte = view.getUint8(i);
+    asciiData1 += String.fromCharCode(byte);
+    //var nospec = view.getInt32(i,true);
+    }
+    title=asciiData1;
+    console.log(title);  
+    freq=Number(asciiData)*1000000;
+    console.log(freq);
+    for (let i=88;i<92;i += 4){
+    var nospec = view.getInt32(i,true);
+    }
+    console.log(nospec);
+    for (let i=92;i<96;i += 4){
+    var xpts = view.getInt32(i,true);
+    }
+    //console.log("nospec",nospec,"xpts",xpts);
+    for (let i=112;i<120;i += 8){
+    var xmin = view.getFloat32(i,true);
+    }
+    //console.log("xmin",xmin);
+    for (let i=184;i<192;i += 8){
+    var xmax = view.getFloat32(i,true);
+    }  
+    //console.log("xmax",xmax);
+    var step = (xmax-xmin)*10/xpts;
+    for (i=0;i<xpts;i++){
+      array_x.push(xmin*10+step*i);
+    }
+    for(i=0;i<nospec;i++){
+      num2Dpoint.push(i);
+    }
+    for (let i=9500;i<data.length;i += 4){
+    var float64 = view.getFloat32(i,true);
+    floats.push(float64);
+    }
+
+    //console.log(floats);
+    var nopoint1d = floats.length/num2Dpoint.length;
+    var names = [];
+    for (i=0;i<num2Dpoint.length;i++){
+      //names.push((title+" "+num2Dpoint[i]));
+      if(num2Dpoint.length>1){
+      names.push(num2Dpoint[i]);
+      }else{
+      names.push(title);
+      }
+      array_y[i] = [];
+      for (j=0;j<nopoint1d;j++){
+        array_y[i].push(floats[i*nopoint1d+j]);
+      }
+    }
+
+      var array_x1 = array_x;
+      var array_y1 = array_y;
+
+    reportData(array_x1,array_y1,freq,names,num2Dpoint);
+    }
+  fileReader.readAsArrayBuffer(document.querySelector('#inputfileJEOL').files[0]);
+}
+
+
+
+function readfileDSC(){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    let regex = /^\s*$(?:\r\n?|\n)/gm;
+    var lines = fileReader.result.split("\n").filter(line => line.trim() !== "").filter(line => !line.startsWith("*")).filter(line => !line.startsWith("#"));
+    var tipall = [];
+    for (var i=0;i<lines.length;i++){
+      var tip = lines[i].split(/\s+/);
+      var tip0 = tip.shift();
+      tipall.push([tip0,tip]);
+    }
+    const entries = new Map(tipall);
+    const desc = Object.fromEntries(entries);
+    var xmin = Number(desc.XMIN);
+    var xpts = Number(desc.XPTS);
+    var xwid = Number(desc.XWID);
+    var freq = Number(desc.MWFQ);
+    //document.getElementById('freq') = freq;
+    var array_x = [];
+    for (var i=0;i<xpts;i++){
+      array_x.push(xmin+i*(xwid/xpts));
+    }
+    var nameDSC = document.getElementById('inputfileDSC').files[0].name.replace(/\.[^/.]+$/, "").toString();
+    var nameDTA  = document.getElementById('inputfileDTA').files[0].name.replace(/\.[^/.]+$/, "").toString();
+    var varYGF = document.getElementById('inputfileYGF');
+    if (varYGF && varYGF.value){
+      var nameYGF=varYGF.files[0].name.replace(/\.[^/.]+$/, "").toString();
+    } else {
+      var nameYGF = null;
+    }
+    if (nameDTA == nameYGF){
+    if (nameDTA == nameDSC){
+    readfileYGF(array_x,freq,nameDTA);
+    }else{
+     alert("Files .DTA and .DSC do NOT MATCH");
+    }
+    } else {
+    var num2Dpoint = [0];
+    if (nameDTA == nameDSC){
+    readfileDTA(array_x,freq,nameDTA,num2Dpoint);
+    }else{
+      alert("Files .DTA and .DSC do NOT MATCH");
+    }
+    }
+
+  }
+  //console.log(document.querySelector('#inputfileDSC').files[0]);
+  fileReader.readAsText(document.querySelector('#inputfileDSC').files[0]);
+}
+
+
+function readfilePAR(){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    let regex = /^\s*$(?:\r\n?|\n)/gm;
+    var lines = fileReader.result.split("\n").filter(line => line.trim() !== "").filter(line => !line.startsWith("*")).filter(line => !line.startsWith("#"));
+    var tipall = [];
+    for (var i=0;i<lines.length;i++){
+      //console.log(lines[i]);
+      var tip = lines[i].split(/\s+/);
+      //console.log(tip);
+      for (var j=0; j<tip.length; j=j+2){
+              tipall.push([tip[j],tip[j+1]]);
+      }
+    }
+    //console.log(tipall);
+    const entries = new Map(tipall);
+    const desc = Object.fromEntries(entries);
+    //const desc = Object.fromEntries(tipall);
+    //console.log(desc);
+    //    var xmin = Number(desc.XMIN);
+    //    var xpts = Number(desc.XPTS);
+    //    var xwid = Number(desc.XWID);
+    //    var freq = Number(desc.MWFQ);
+    //    //document.getElementById('freq') = freq;
+    var xpts = Number(desc.ANZ);
+    var xwid = Number(desc.HSW);
+    var xmin = Number(desc.EMF);
+    var freq = Number(desc.MF)*1000000000;
+    var dos = desc.DOS;
+    //console.log(xpts,xwid,xmin,freq);
+    if ( isNaN(xpts) ){
+      xpts=1024;
+    }
+    if ( isNaN(xmin)){
+      xmin = Number(desc.HCF) - 0.5*xwid;
+    }
+    //console.log(xpts,xwid,xmin,freq);
+    var array_x = [];
+    for (var i=0;i<xpts;i++){
+      array_x.push(xmin+i*(xwid/xpts));
+    }
+    //console.log(array_x);
+    var nameDSC = document.getElementById('inputfilePAR').files[0].name.replace(/\.[^/.]+$/, "").toString();
+    var nameDTA  = document.getElementById('inputfileSPC').files[0].name.replace(/\.[^/.]+$/, "").toString();
+    var varYGF = document.getElementById('inputfileYGFold');
+    if (varYGF && varYGF.value){
+      var nameYGF=varYGF.files[0].name.replace(/\.[^/.]+$/, "").toString();
+    } else {
+      var nameYGF = null;
+    }
+    if (nameDTA == nameYGF){
+    if (nameDTA == nameDSC){
+    readfileYGF(array_x,freq,nameDTA);
+    }else{
+     alert("Files .PAR and .SPC do NOT MATCH");
+    }
+    } else {
+    var num2Dpoint = [0];
+    if (nameDTA == nameDSC){
+      if( desc.DOS == "Format"){
+        readfileSPC_DOS(array_x,freq,nameDTA,num2Dpoint);
+      }else{
+        readfileSPC(array_x,freq,nameDTA,num2Dpoint);
+      }
+    }else{
+      alert("Files .PAR and .SPC do NOT MATCH");
+    }
+    }
+
+  }
+  fileReader.readAsText(document.querySelector('#inputfilePAR').files[0]);
+}
+
+
+function readfileSPC_DOS(array_x,freq,title,num2Dpoint){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    console.log("DOS");
+    var data = new Int8Array(fileReader.result);
+    var view = new DataView(data.buffer);
+    //console.log(view);
+    let floats = [];
+    var array_y = [];
+    for (let i=0;i<data.length;i += 4){
+    //  NEW BRUKER FORMAT!!!
+    var float64 = view.getFloat32(i,true);
+    //var float64 = hex2float(view);
+    floats.push(float64);
+    }
+    console.log(floats);
+    var nopoint1d = floats.length/num2Dpoint.length;
+    var names = [];
+    for (i=0;i<num2Dpoint.length;i++){
+      //names.push((title+" "+num2Dpoint[i]));
+      if(num2Dpoint.length>1){
+      names.push(num2Dpoint[i]);
+      }else{
+      names.push(title);
+      }
+      array_y[i] = [];
+      for (j=0;j<nopoint1d;j++){
+        array_y[i].push(floats[i*nopoint1d+j]);
+      }
+    }
+    reportData(array_x,array_y,freq,names,num2Dpoint);
+    }
+  fileReader.readAsArrayBuffer(document.querySelector('#inputfileSPC').files[0]);
+}
+
+function readfileSPC(array_x,freq,title,num2Dpoint){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var data = new Int8Array(fileReader.result);
+    var view = new DataView(data.buffer);
+    let floats = [];
+    var array_y = [];
+    for (let i=0;i<data.length;i += 4){
+    // OLD BRUKER FORMAT!!!
+    var float64 = view.getInt32(i,false);
+    floats.push(float64);
+    }
+    console.log(floats);
+    var nopoint1d = floats.length/num2Dpoint.length;
+    var names = [];
+    for (i=0;i<num2Dpoint.length;i++){
+      //names.push((title+" "+num2Dpoint[i]));
+      if(num2Dpoint.length>1){
+      names.push(num2Dpoint[i]);
+      }else{
+      names.push(title);
+      }
+      array_y[i] = [];
+      for (j=0;j<nopoint1d;j++){
+        array_y[i].push(floats[i*nopoint1d+j]);
+      }
+    }
+    reportData(array_x,array_y,freq,names,num2Dpoint);
+    }
+  fileReader.readAsArrayBuffer(document.querySelector('#inputfileSPC').files[0]);
+}
+
+function readfileDTA(array_x,freq,title,num2Dpoint){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var data = new Uint8Array(fileReader.result);
+    var view = new DataView(data.buffer);
+    let floats = [];
+    var array_y = [];
+    for (let i=0;i<data.length;i += 8){
+    var float64 = view.getFloat64(i,false);
+    floats.push(float64);
+    }
+    //console.log(floats);
+    var nopoint1d = floats.length/num2Dpoint.length;
+    var names = [];
+    for (i=0;i<num2Dpoint.length;i++){
+      //names.push((title+" "+num2Dpoint[i]));
+      if(num2Dpoint.length>1){
+      names.push(num2Dpoint[i]);
+      }else{
+      names.push(title);
+      }
+      array_y[i] = [];
+      for (j=0;j<nopoint1d;j++){
+        array_y[i].push(floats[i*nopoint1d+j]);
+      }
+    }
+    reportData(array_x,array_y,freq,names,num2Dpoint);
+    }
+  fileReader.readAsArrayBuffer(document.querySelector('#inputfileDTA').files[0]);
+}
+
+
+function readfileYGF(array_x,freq,nameDTA){
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    var data = new Uint8Array(fileReader.result);
+    var view = new DataView(data.buffer);
+    let floats = [];
+    for (let i=0;i<data.length;i += 8){
+    var float64 = view.getFloat64(i,false);
+    floats.push(float64);
+    }
+    //console.log(floats);
+    readfileDTA(array_x,freq,nameDTA,floats);
+    }
+  fileReader.readAsArrayBuffer(document.querySelector('#inputfileYGF').files[0]);
+}
+
+function reportData(array_x,array_y,freq,names,num2Dpoint){
+hide('big_input');show('graphDiv');show('manip_opt');hide('introTxt');show('introTxt1');
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+document.getElementById('freq').value = freq;
+document.getElementById('freqGHz').value = freq/1000000000;
+  var data_viz = [];
+  var g_val = [];
+    for (j=0;j<array_x.length;j++){
+      g_val.push((h*freq/(array_x[j]*mu)).toPrecision(7));      
+    }
+  for (i=0;i<names.length;i++){
+    var trace = {
+      x: array_x,
+      y: array_y[i],
+      z: num2Dpoint[i],
+      text: g_val,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: names[i]
+    };
+  data_viz.push(trace);
+  }
+
+  var config = {
+    displayModeBar: true,
+    toImageButtonOptions: {
+      format: "png", // one of png, svg, jpeg, webp
+      filename: "EPR_spectra",
+      height: 800,
+      width: 1200,
+      scale: 4 // Multiply title/legend/axis/canvas sizes by this factor
+    }
+  };
+
+  var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+  if (isEmpty == true){
+    Plotly.newPlot('graphDiv', data_viz, {showlegend: true, legend: {"orientation": 'h', xanchor: "center", x: 0.5, y: 1.1}, hovermode:'closest',annotations: annotations}, config);
+
+    var myPlot = document.getElementById('graphDiv');
+    myPlot.on('plotly_click', function(data_viz){
+      var pts = '';
+      for(var i=0; i < data_viz.points.length; i++){
+        if(annotations.length != 0){
+          var g = (h*freq/(data_viz.points[i].x*mu));
+
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+data_viz.points[i].text+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+          for (j=annotations.length;j>0;j--){
+            annotate_text += '<br>'+'dx('+(j-1)+'-'+(annotations.length)+') = '+Math.abs(annotations[j-1].x-data_viz.points[i].x).toPrecision(4) + " G<br>&nbsp;&nbsp;g<sub>avg</sub>("+(j-1)+"-"+(annotations.length)+") = "+((Number(data_viz.points[i].text)+Number(annotations[j-1].g))/2);
+          }
+                      }else{
+          var g = (h*freq/(data_viz.points[i].x*mu));
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+data_viz.points[i].text+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+                      }
+
+          annotation = {
+              arrowhead: 6,
+              ax: 0,
+              ay: -80,
+              bgcolor: 'rgba(255, 255, 255, 0.9)',
+              arrowcolor: 'black',
+              font: {size:12},
+              bordercolor: 'black',
+              borderwidth: 1,
+              borderpad: 1,
+            text: annotate_text,
+            x: data_viz.points[i].x,
+            y: parseFloat(data_viz.points[i].y.toPrecision(4)),
+            g: data_viz.points[i].text
+          }
+          //annotations += self.layout.annotations;
+          //annotations = self.layout.annotations || [];
+          annotations.push(annotation);
+          Plotly.relayout('graphDiv',{annotations: annotations})
+      }
+    });
+  } else {
+    Plotly.addTraces(graphDiv,data_viz);
+  }
+
+}
+
+function make3d(){
+var data = graphDiv.data;
+  console.log(data);
+var all_trace = [];
+var timeAbs = [];
+for (var i=0; i<data.length; i++){
+  timeAbs.push(Number(data[i].name));
+}
+var timeRel = [];
+for (var i=1; i<timeAbs.length; i++){
+if (i == 1){
+  timeRel.push([-(timeAbs[i]-0)/3,(timeAbs[i]-0)/3]);
+} 
+  timeRel.push([timeAbs[i]-(timeAbs[i]-timeAbs[i-1])/3,timeAbs[i]+(timeAbs[i]-timeAbs[i-1])/3]);
+}
+for (var i=0; i<data.length; i++){
+    if (i == 0) {
+      var leg = true;
+    } else {
+      var leg = false;
+    }
+  var trace = {
+    x:[data[i].x,data[i].x],
+    z:[data[i].y,data[i].y],
+    y:timeRel[i],
+    name: '',
+    //colorscale: figure.data[0].colorscale,
+    type: 'surface',
+    showscale: leg,
+    showlegend: leg
+  }
+  all_trace.push(trace);
+}
+document.getElementById('graphDiv1').style="width:auto; min-height:600px; height:auto; position:relative"
+Plotly.newPlot('graphDiv1', all_trace);
+
+}
+
+
+
+function selecttraces(){
+  var inputCount = 0;
+  const container = document.getElementById('traces');  
+  console.log(inputCount);
+  var data = graphDiv.data;
+  console.log(data);
+  let input = document.createElement("div");
+  for (i=0; i<data.length; i++){
+    const text0 = document.createTextNode("Trace "+(i+1)+":"+" "+data[i].name);
+    input.appendChild(document.createElement("br"));
+    input.appendChild(text0);
+  }
+  container.appendChild(input);
+}
+
+
+
+function addcomp(){
+  var inputCount = document.getElementById("simparam").children.length;
+  const container = document.getElementById('simparam');
+  let input = document.createElement("div");
+  input.name = "component";
+  input.id = "component"+inputCount;
+  const text0 = document.createTextNode("Radical "+(inputCount+1)+":");
+ // const text01 = document.createTextNode("intensity: ");
+  const text1 = document.createTextNode("rel. amount (%): ");
+  const text2 = document.createTextNode("g(iso):");
+  const text3 = document.createTextNode("Lorentzian (%):");
+  const text4 = document.createTextNode("line width (G):");
+ /* let intensity = document.createElement("input");
+  intensity.type = "number";
+  intensity.value = 1;
+  intensity.name = "intensity";
+  intensity.step = 0.1;
+  intensity.min = 0;
+  intensity.max = 2;
+  intensity.onchange = function () {
+  eprsim();
+  }; */
+  let gfactor = document.createElement("input");
+  gfactor.type = "number";
+  gfactor.name = "gfactor";
+  gfactor.value = 2.0023;
+  gfactor.step = 0.0001;
+  gfactor.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+  gfactor.onchange = function () {
+  eprsim();
+  };
+  let percent = document.createElement("input");
+  percent.type = "number";
+  percent.value = 100;
+  percent.name = "percent";
+  percent.step = 1;
+  percent.min = 0;
+  percent.max = 100;
+  percent.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+  percent.onchange = function () {
+  eprsim();
+  };
+  let lor = document.createElement("input");
+  lor.type = "number";
+  lor.name = "lor";
+  lor.value = 100;
+  lor.step = 1;
+  lor.max= 100;
+  lor.min = 0;
+  lor.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+  lor.onchange = function () {
+  eprsim();
+  };
+  let width = document.createElement("input");
+  width.type = "number";
+  width.name = "width";
+  width.value = 0.50;
+  width.type = "number";
+  width.step = 0.01;
+  width.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+  width.onchange = function () {
+  eprsim();
+  };
+  let spinners = document.createElement("div");
+  spinners.name = "spinners";
+  spinners.id = "spinners"+inputCount; 
+  let addAtom_btn = document.createElement("button");
+  addAtom_btn.className = "button";
+  addAtom_btn.innerHTML = "Add nucleus";
+  addAtom_btn.name = "addAtom_btn";
+  addAtom_btn.id = "addAtom_btn"+inputCount;  
+  addAtom_btn.onclick = function () {
+  addAtom(inputCount);eprsim();
+  };
+  let removeAtom_btn = document.createElement("button");
+  removeAtom_btn.className = "button";
+  removeAtom_btn.innerHTML = "Remove nucleus";
+  removeAtom_btn.name = "removeAtom_btn";
+  removeAtom_btn.onclick = function () {
+  removeAtom(inputCount);eprsim();
+  };
+  input.appendChild(document.createElement("br"));
+  input.appendChild(text0);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(document.createElement("br"));
+  input.appendChild(text1);
+  input.appendChild(percent);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(text2);
+  input.appendChild(gfactor);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(text3);
+  input.appendChild(lor);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(text4);
+  input.appendChild(width);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(document.createElement("br"));
+  input.appendChild(spinners);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(addAtom_btn);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(removeAtom_btn);
+  input.appendChild(document.createElement("br"));
+  input.appendChild(document.createElement("br"));
+  container.appendChild(input);
+  //var proba = document.getElementsByName("gfactor");
+  //console.log(proba[0].value);
+}
+
+function addAtom(inputCount){
+let equiv= document.createElement("input");
+equiv.type = "number";
+equiv.name = "equiv";
+equiv.value = 1;
+equiv.min = 1;
+equiv.step = 1;
+equiv.max = 6;
+equiv.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+equiv.onchange = function () {
+  eprsim();
+  };
+let spin = document.createElement("input");
+spin.type = "number";
+spin.name = "spin";
+spin.value = 0.5;
+spin.min = 0.5;
+spin.step = 0.5;
+spin.max = 4;
+spin.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+spin.onchange = function () {
+  eprsim();
+  };
+let hfc = document.createElement("input");
+hfc.type = "number";
+hfc.name = "hfc";
+hfc.value = "5";
+hfc.min = "0";
+hfc.step = "0.1";
+hfc.max = "100";
+hfc.style = "width: 75px; height: 25px; font-size: 100%; margin: 4px";
+hfc.onchange = function () {
+  eprsim();
+  };
+let atom = document.createElement("div");
+atom.appendChild(document.createTextNode("No. equiv. nuclei: "));
+atom.appendChild(equiv);
+atom.appendChild(document.createElement("br"));
+atom.appendChild(document.createTextNode("nuclear spin: "));
+atom.appendChild(spin);
+atom.appendChild(document.createElement("br"));
+atom.appendChild(document.createTextNode("hyperfine (G): "));
+atom.appendChild(hfc);
+atom.appendChild(document.createElement("br"));
+spinner=document.getElementById("spinners"+inputCount);
+spinner.appendChild(atom);
+//input.insertBefore(addAtom_btn,atom);
+}
+
+function removeAtom(inputCount){
+  //console.log(inputCount);
+  var spinner = document.getElementById("spinners"+inputCount);
+  spinner.removeChild(spinner.lastChild);
+}
+
+function removecomp(){
+  var container = document.getElementById("simparam");
+  //console.log(container.children.length);
+  if(container.children.length > 1){
+  container.removeChild(container.lastChild);
+  }else{
+    for (i=0;i<graphDiv.data.length;i++){
+       if (graphDiv.data[i].name.startsWith('simulation') == true ){
+        Plotly.deleteTraces(graphDiv,i);
+      }
+    }
+    container.removeChild(container.lastChild);
+  }
+}
+
+function showhide(div) {
+  var x = document.getElementById(div);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function show(div) {
+  var x = document.getElementById(div);
+  if(div == "graphDiv"){
+  document.getElementById('graphDiv').style="width:auto; min-height:600px; height:auto; position:relative"
+  }
+    x.style.display = "block";
+}
+
+function hide(div) {
+  var x = document.getElementById(div);
+    x.style.display = "none";
+}
+
+function hidename(div,no) {
+  var x = document.getElementsByName(div);
+  for (i=0;i<x.length;i++){
+    if(i != no){
+      x[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+
+<script>
+
+//remove first trace
+function removefirst(){
+  Plotly.deleteTraces(graphDiv, 0);
+}
+
+//remove last trace
+function removelast(){
+  var data = graphDiv.data;
+  Plotly.deleteTraces(graphDiv, graphDiv.data.length-1);
+}
+
+//re-plot
+function replot(){
+  Plotly.purge(graphDiv);
+  var inputfile = document.getElementById('inputfile');
+  if (inputfile && inputfile.value){
+    readfile();
+  } 
+  var inputfile1 = document.getElementById('inputfile1');
+  if (inputfile1 && inputfile1.value){
+    readfile1();
+  }  
+  var inputfile2 = document.getElementById('inputfile2');
+  if (inputfile2 && inputfile2.value){
+    readfile2();
+  }  
+  var varDSC = document.getElementById('inputfileDSC');
+  if (varDSC && varDSC.value){
+    readfileDSC();
+  }
+
+  var varPAR = document.getElementById('inputfilePAR');
+  if (varPAR && varPAR.value){
+    readfilePAR();
+  }
+
+  var varJEOL = document.getElementById('inputfileJEOL');
+  if (varJEOL && varJEOL.value){
+    readfileJEOL();
+  }
+
+  var varMTXML = document.getElementById('inputfileMTXML');
+  if (varMTXML && varMTXML.value){
+    readfileMTXML();
+  }
+
+  var varJSON= document.getElementById('inputfileJSON');
+  if (varJSON && varJSON.value){
+    readfileJSON();
+  }
+
+}
+
+function clearAnnot(){
+  var data = graphDiv.data;
+  var lay = graphDiv.layout;
+  lay.annotations = [];
+  Plotly.purge(graphDiv);
+  Plotly.newPlot(graphDiv,data,lay);
+}
+
+//linear regression function
+function findLine(values_x, values_y) {
+    var x_sum = 0;
+    var y_sum = 0;
+    var xy_sum = 0;
+    var xx_sum = 0;
+    var yy_sum = 0;
+    var count = 0;
+    var x = 0;
+    var y = 0;
+    var values_length = values_x.length;
+    if (values_length === 0) {
+        return [ [], [], [] ];
+    }
+    for (let i = 0; i< values_length; i++) {
+        x = Number(values_x[i]);
+        y = Number(values_y[i]);
+        x_sum+= x;
+        y_sum+= y;
+        xx_sum += x*x;
+        xy_sum += x*y;
+        yy_sum += y*y;
+        count++;
+    }
+    var avg_x = x_sum/count;
+    var avg_y = y_sum/count;
+    var m = (count*xy_sum - x_sum*y_sum) / (count*xx_sum - x_sum*x_sum);
+    var b = (y_sum/count) - (m*x_sum)/count;
+    var result_values_x = [];
+    var result_values_y = [];
+    var diffy = [];
+    var diffx = [];
+    var diffxy = [];
+    var sum_diffy2 = 0;
+    var sum_diffx2 = 0;
+    var sum_diffxy = 0;
+    var y1;
+    for (let i = 0; i < values_length; i++) {
+        x = values_x[i];
+        y = values_y[i];
+        y1 = x * m + b;
+        result_values_x.push(x);
+        result_values_y.push(y1);
+        diffy.push(y-avg_y);
+        diffx.push(x-avg_x);
+        diffxy.push(diffx[i]*diffy[i]);
+        sum_diffy2 += Math.pow(diffy[i],2);
+        sum_diffx2 += Math.pow(diffx[i],2);
+        sum_diffxy += diffxy[i];
+    }
+    var r2 = Math.pow((count*xy_sum - x_sum*y_sum)/Math.sqrt((count*xx_sum-x_sum*x_sum)*(count*yy_sum-y_sum*y_sum)),2);
+    if (r2 > 1){
+      r2 = 0;
+    }
+    if (r2 < 0){
+      r2 = 0; 
+    }
+    var stexy_korak1=(sum_diffxy*sum_diffxy/sum_diffx2);
+    var stexy_korak2=(1/(count-2))*(sum_diffy2-stexy_korak1);
+    var stexy=Math.sqrt(stexy_korak2);
+    var se = 0;
+    for (let i = 0; i < values_length; i++) {
+    se += Math.pow((result_values_y[i]-values_y[i])/result_values_y[i],2);
+    }
+    var rmsre = Math.sqrt(se/values_length,2);
+    var lod = 3.3*stexy/m;
+    //var lod = b + 3.3*stexy/m;
+    //normalise
+    var xmax = Math.max(...values_x);
+    var ymax = Math.max(...values_y);
+    var ymax1 = xmax*m+b;
+    var lodPerc = lod/xmax*100;
+var xnorm_sum = 0;
+var ynorm_sum = 0;
+var xxnorm_sum = 0;
+var xynorm_sum = 0;
+var yynorm_sum = 0;
+count = 0;
+for (let i = 0; i < values_length; i++) {
+       var x = values_x[i];
+       var y = values_y[i];
+       var y1 = x * m + b;
+       var xnorm = x/xmax;
+        //ynorm = y/ymax;
+        ynorm = y/ymax1;
+        xnorm_sum += xnorm;
+        ynorm_sum += ynorm;
+        xxnorm_sum += Math.pow(xnorm,2);
+        xynorm_sum += xnorm*ynorm;
+        yynorm_sum += Math.pow(ynorm,2);
+        count++;
+}
+    var mnorm = (count*xynorm_sum - xnorm_sum*ynorm_sum) / (count*xxnorm_sum - xnorm_sum*xnorm_sum);
+    var bnorm = (ynorm_sum/count) - (m*xnorm_sum)/count;
+    var mErr = (mnorm-1)*100;
+    return [m, b, r2, rmsre, stexy, lod, mErr, lodPerc];
+}
+//end statistics
+
+function baselineFunc(){
+
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+    if(graphDiv.data[graphDiv.data.length-1].name.startsWith('simulation') == true){
+  var array = graphDiv.data[graphDiv.data.length-2].y;
+  var orig_data_x = graphDiv.data[graphDiv.data.length-2].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-2].text;
+    }else{
+  var array = graphDiv.data[graphDiv.data.length-1].y;
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+    }
+
+/*
+var arrayderiv = [];
+arrayderiv.push(0);
+for(i=1;i<array.length;i++){
+  arrayderiv.push(array[i]-array[i-1]);
+}
+
+var arrayinteg = [];
+arrayinteg.push(0);
+for(i=1;i<arrayderiv.length-1;i++){
+  arrayinteg.push(arrayinteg[arrayinteg.length-1]+arrayderiv[i]);
+}
+
+var baseline_corr = arrayinteg;
+*/
+
+
+  var array = graphDiv.data[graphDiv.data.length-1].y;
+  var seconderiv = [];
+  seconderiv.push(0);
+  smoothSAVGOL=document.getElementsByName("smoothSAVGOL")[0].value;
+  noise=document.getElementsByName("noise")[0].value;
+  var array1 = smoothSAVGOLFunc(array,smoothSAVGOL);
+  for (i=1;i<array1.length;i++){
+  seconderiv.push(array1[i]-array1[i-1]);
+  };
+  var maxderv=_.max(seconderiv);
+  var minderv=_.min(seconderiv);
+  var spanderv=maxderv-minderv;
+  var noise_valderv=spanderv*noise;
+
+  var baselinefunct_y = [];
+  var baselinefunct_x = [];
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+  for (i=0;i<seconderiv.length;i++){
+    if(seconderiv[i]<noise_valderv){
+      baselinefunct_y.push(array[i]);
+      baselinefunct_x.push(orig_data_x[i]);
+    }
+  }
+
+  var max=_.max(array);
+  var min=_.min(array);
+  var span=max-min;
+  var noise_val=span*noise;
+
+  var factUp = -noise_val;
+  var factDwn = noise_val;
+
+  var baseline_val = [];
+  var baseline_valUp = [];
+  var baseline_valDwn = [];
+  var baseline_stat=findLine(baselinefunct_x,baselinefunct_y);
+  var trace = [];
+  var g_val = [];
+  var baseline_corr = [];
+  for (i=0;i<orig_data_x.length;i++){
+    baseline_val.push(orig_data_x[i]*baseline_stat[0] + baseline_stat[1]);
+    baseline_valUp.push(baseline_val[baseline_val.length-1]+(factUp));
+    baseline_valDwn.push(baseline_val[baseline_val.length-1]+(factDwn));
+    baseline_corr.push(array[i]-(orig_data_x[i]*baseline_stat[0] + baseline_stat[1]));
+    g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+  }
+console.log(orig_data_x[0],orig_data_x[orig_data_x.length-1]);
+
+var trace1 = {
+      x: orig_data_x,
+      y: baseline_corr,
+      //text: g_val,
+      text: orig_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'baseline'
+};
+
+Plotly.addTraces(graphDiv,trace1);
+
+var trace2 = {
+      x: orig_data_x,
+      y: baseline_val,
+      text: g_val,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'baseline line'
+};
+
+Plotly.addTraces(graphDiv,trace2);
+
+return([baseline_val,baseline_valUp,baseline_valDwn,seconderiv]);
+
+}
+
+
+function baselineFuncSoloPan(traceOld,val){
+  console.log(val);
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+
+  var array = [];
+  for (i=0;i<traceOld.y.length;i++){
+    array.push(Number(traceOld.y[i]));
+  }
+    //console.log(array);
+  var seconderiv = [];
+  seconderiv.push(0);
+  var array1 = array;
+  for (i=1;i<array1.length;i++){
+  seconderiv.push(array1[i]-array1[i-1]);
+  };
+  var maxderv=_.max(seconderiv);
+  var minderv=_.min(seconderiv);
+  var spanderv=maxderv-minderv;
+  var noise_valderv=spanderv*0.1;
+
+  var baselinefunct_y = [];
+  var baselinefunct_x = [];
+  var orig_data_x = traceOld.x;
+  var orig_data_text = traceOld.text;
+  for (i=0;i<seconderiv.length;i++){
+    if(seconderiv[i]<noise_valderv){
+      baselinefunct_y.push(array[i]);
+      baselinefunct_x.push(orig_data_x[i]);
+    }
+  }
+
+  var max=_.max(array);
+  var min=_.min(array);
+  var span=max-min;
+  var noise_val=span*0.1;
+
+  var baseline_stat=findLine(baselinefunct_x,baselinefunct_y);
+  var baseline_corr = [];
+  for (i=0;i<orig_data_x.length;i++){
+    baseline_corr.push(val+array[i]-(Number(orig_data_x[i])*baseline_stat[0] + baseline_stat[1]));
+  }
+  //console.log(baseline_corr);
+var trace1 = {
+      x: orig_data_x,
+      y: baseline_corr,
+      text: orig_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: traceOld.name
+};
+return(trace1);
+};
+
+
+function normalizeFunc(){
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  const array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+
+x_mean = _.mean(array);
+var s_sum = 0;
+for (i=0;i<array.length;i++){
+  s_sum += Math.pow(array[i]-x_mean,2);
+}
+var s_mean = s_sum/array.length;
+var s_factor = Math.sqrt(s_mean);
+var g_val = [];
+var normalize_val = [];
+for (i=0;i<array.length;i++){
+  normalize_val.push((Number(array[i])-x_mean)/s_factor);
+  g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+}
+var trace1 = {
+      x: orig_data_x,
+      y: normalize_val,
+      //text: g_val,
+      text: orig_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'normalized'
+};
+
+Plotly.addTraces(graphDiv,trace1);
+
+}
+
+
+function resample(){
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    var name = graphDiv.data[graphDiv.data.length-2].name;
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    var name = graphDiv.data[graphDiv.data.length-1].name;
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  const array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+
+  var delta = Math.round(array.length/1024);
+  console.log(delta);
+  var resample_data_x = [];
+  var resample_val = [];
+  var resample_data_text = [];
+
+ for (i=0;i<array.length;i=i+delta){
+ resample_data_x.push(orig_data_x[i]);
+ resample_val.push(array[i]);
+ resample_data_text.push(orig_data_text[i]);
+ }
+
+
+var trace1 = {
+      x: resample_data_x,
+      y: resample_val,
+      //text: g_val,
+      text: resample_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'resampled-'+name
+};
+
+if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+Plotly.deleteTraces(graphDiv, graphDiv.data.length-2);
+}else{
+Plotly.deleteTraces(graphDiv, graphDiv.data.length-1);
+}
+
+Plotly.addTraces(graphDiv,trace1);
+
+}
+
+function movingavgFunc() {
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+  var newarray = [];
+  var testarray = [];
+  var smoothing = document.getElementsByName("smooth")[0].value;
+  for (i=smoothing-1;i>0;i--){
+  testarray.push(Number(array[i]));
+  }
+  for (i=0;i<array.length;i++){
+  testarray.push(Number(array[i]));
+  }
+  var testlength = testarray.length;
+  for (i=0;i<smoothing-1;i++){
+  testarray.push(Number(array[testlength-i]));
+  }
+
+  for (i=smoothing;i<testarray.length;i++){
+    var sumarr = [];
+    sumarr.push(testarray[i]);
+    for (j=1;j<smoothing;j++){
+      sumarr.push(testarray[i-j]);
+      sumarr.push(testarray[i+j]);
+    }
+    avg=_.mean(sumarr);
+    newarray.push(avg);
+  }
+
+var g_val = [];
+for (i=0;i<orig_data_x.length;i++){
+  g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+}
+
+var trace1 = {
+      x: orig_data_x,
+      y: newarray,
+      //text: g_val,
+      text: orig_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'moving average '+smoothing
+};
+
+Plotly.addTraces(graphDiv,trace1);
+
+return newarray;
+}
+
+function smoothSAVGOLFunc(array,smoothing) {
+  var acceptval = [5,7,9,11,13,15,17,19,21];
+  if (acceptval.includes(Number(smoothing)) != true){
+    smoothing = 5;
+    var range = 2;
+  }
+  if (smoothing < 5){
+    smoothing = 5;
+  }
+  if (smoothing > 21){
+    smoothing = 21;
+  }  
+  var range = (smoothing-1)/2;
+  var newarray = [];
+  var testarray = [];
+  newarray.push(array[0]);
+  for (i=range;i>1;i--){
+  testarray.push(Number(array[i]));
+  }
+  for (i=0;i<array.length;i++){
+  testarray.push(Number(array[i]));
+  }
+  var testlength = testarray.length;
+  for (i=1;i<range;i++){
+  testarray.push(Number(array[testlength-i]));
+  }
+  testarray.push(testarray[testarray.length-1]);
+  var factorsSAVGOL= [
+  [17,12,-3],
+  [7,6,3,-2],
+  [59,54,39,14,-21],
+  [89,84,69,44,9,-36],
+  [25,24,21,16,9,0,-11],
+  [167,162,147,122,87,42,-13,-78],
+  [43,42,39,34,27,18,7,-6,-21],
+  [269,264,249,224,189,144,89,24,-51,-136],
+  [329,324,309,284,249,204,149,84,9,-76,-171]
+  ];
+  var fact=factorsSAVGOL[acceptval.indexOf(Number(smoothing))];
+  for (i=range;i<testarray.length;i++){
+    var sumarr = [];
+    var norm1 = fact[0];
+    sumarr.push(testarray[i]*fact[0]);
+    for (j=1;j<range+1;j++){
+      sumarr.push(testarray[i-j]*fact[j]);
+      sumarr.push(testarray[i+j]*fact[j]);
+      norm1 += fact[j]*2;
+    }
+    avg=_.mean(sumarr)/norm1*smoothing;
+    newarray.push(avg);
+  }
+return newarray;
+}
+
+function savgolFunc() {
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var smoothing = document.getElementsByName("smoothSAVGOL")[0].value;
+  var acceptval = [5,7,9,11,13,15,17,19,21];
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+
+  if (acceptval.includes(Number(smoothing)) != true){
+    smoothing = 5;
+    var range = 2;
+  }
+  if (smoothing < 5){
+    smoothing = 5;
+  }
+  if (smoothing > 21){
+    smoothing = 21;
+  }  
+  var range = (smoothing-1)/2;
+  var newarray = [];
+  var testarray = [];
+  newarray.push(array[0]);
+  for (i=range;i>1;i--){
+  testarray.push(Number(array[i]));
+  }
+  for (i=0;i<array.length;i++){
+  testarray.push(Number(array[i]));
+  }
+  var testlength = testarray.length;
+  for (i=1;i<range;i++){
+  testarray.push(Number(array[testlength-i]));
+  }
+  testarray.push(testarray[testarray.length-1]);
+  var factorsSAVGOL= [
+  [17,12,-3],
+  [7,6,3,-2],
+  [59,54,39,14,-21],
+  [89,84,69,44,9,-36],
+  [25,24,21,16,9,0,-11],
+  [167,162,147,122,87,42,-13,-78],
+  [43,42,39,34,27,18,7,-6,-21],
+  [269,264,249,224,189,144,89,24,-51,-136],
+  [329,324,309,284,249,204,149,84,9,-76,-171]
+  ];
+  var fact=factorsSAVGOL[acceptval.indexOf(Number(smoothing))];
+  for (i=range;i<testarray.length;i++){
+    var sumarr = [];
+    var norm1 = fact[0];
+    sumarr.push(testarray[i]*fact[0]);
+    for (j=1;j<range+1;j++){
+      sumarr.push(testarray[i-j]*fact[j]);
+      sumarr.push(testarray[i+j]*fact[j]);
+      norm1 += fact[j]*2;
+    }
+    avg=_.mean(sumarr)/norm1*smoothing;
+    newarray.push(avg);
+  }
+
+var g_val = [];
+for (i=0;i<orig_data_x.length;i++){
+  g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+}
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+var trace1 = {
+      x: orig_data_x,
+      y: newarray,
+      //text: g_val,
+     text: orig_data_text,
+     mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'Savitzky-Golay '+smoothing
+};
+
+Plotly.addTraces(graphDiv,trace1);
+
+}
+
+
+function noiseFunc() {
+  var newarray = [];
+  var baseline_all = baselineFunc(array,orig_data_x,noise);
+  var report_value = [];
+  for (i=0;i<array.length;i++){
+    var test = [array[i],baseline_all[1][i],baseline_all[2][i]];
+    var test1 = test.sort(function(a, b){return a - b});
+    if(array[i] == test1[1]){
+      newarray.push(baseline_all[0][i]);
+      report_value.push("baseline");
+    } else {
+      newarray.push(array[i]);
+    }
+  }
+  return newarray;
+}
+
+
+function noisecanFunc(){
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var noise = document.getElementsByName("noise")[0].value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var newarray = [];
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var min_y = _.min(array);
+  var max_y = _.max(array);
+  var span = Math.abs(min_y) + Math.abs(max_y);
+  var barrier = noise*span;
+  var mean_y = _.mean(array);
+  for (i=0;i<array.length;i++){
+    var test = [array[i],mean_y+barrier,mean_y-barrier];
+    var test1 = test.sort(function(a, b){return a - b});
+    if(array[i] == test1[1]){
+      newarray.push(mean_y);
+      //newarray.push(0);
+    } else {
+      newarray.push(array[i]);
+    }
+  }
+var g_val = [];
+for (i=0;i<orig_data_x.length;i++){
+  g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+}
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+var trace1 = {
+      x: orig_data_x,
+      y: newarray,
+      //text: g_val,
+      text: orig_data_text,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: 'noise cancelation '+(noise*100)+"%"
+};
+
+Plotly.addTraces(graphDiv,trace1);
+}
+
+
+function integFunc(){
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var noise = document.getElementsByName("noise")[0].value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+
+  var newarray = [];
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+  newarray.push(Number(array[0]));
+  for (i=1;i<array.length;i++){
+    newarray.push(Number(array[i])+newarray[newarray.length-1]);
+  }
+
+  var g_val = [];
+  for (i=0;i<orig_data_x.length;i++){
+    g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+  }
+
+  var traceMax = Math.abs(_.max(array));
+  var traceMin = Math.abs(_.min(array));
+  var norm = _.max([traceMax,traceMin]);
+  var newarray_norm = normalize(newarray,norm);
+
+  var trace1 = {
+        x: orig_data_x,
+        y: newarray_norm,
+        //text: g_val,
+        text: orig_data_text,
+        mode: 'lines+markers',
+        marker: {size: 0.01},
+        type: 'scatter',
+        name: 'integral'
+  };
+
+  Plotly.addTraces(graphDiv,trace1);  
+}
+
+function derivFunc(){
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+  var noise = document.getElementsByName("noise")[0].value;
+  var array1 = [];
+  if(graphDiv.data[graphDiv.data.length-1].name == "baseline line"){
+    for (i=0;i<graphDiv.data[graphDiv.data.length-2].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-2].y[i]));
+    }
+  } else {
+    for (i=0;i<graphDiv.data[graphDiv.data.length-1].y.length;i++){
+      array1.push(Number(graphDiv.data[graphDiv.data.length-1].y[i]));
+    }
+  }
+  array = array1.filter(function (value) {
+    return !Number.isNaN(value);
+  });
+  var newarray = [];
+  var orig_data_x = graphDiv.data[graphDiv.data.length-1].x;
+
+  newarray.push(0);
+  for (i=1;i<array.length;i++){
+    newarray.push(Number(array[i])-Number(array[i-1]));
+  }
+
+  var g_val = [];
+  for (i=0;i<orig_data_x.length;i++){
+    g_val.push((h*freq/(Number(orig_data_x[i])*mu)).toPrecision(7));
+  }
+  var min=_.min(array);
+  var max=_.max(array);
+  var span=max-min;
+  var minNew = _.min(newarray);
+  var maxNew = _.max(newarray);
+  var spanNew = maxNew-minNew;
+  var scalefact = span/spanNew;
+  var newarray_scaled = [];
+  for(i=0;i<newarray.length;i++){
+    newarray_scaled.push(newarray[i]*scalefact);
+  }
+  var orig_data_text = graphDiv.data[graphDiv.data.length-1].text;
+  var trace1 = {
+        x: orig_data_x,
+        y: newarray_scaled,
+        //text: g_val,
+        text: orig_data_text,
+        mode: 'lines+markers',
+        marker: {size: 0.01},
+        type: 'scatter',
+        name: 'derivation'
+  };
+
+  Plotly.addTraces(graphDiv,trace1);  
+}
+
+
+//download data
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+function downloadData(){
+  var title = ['magnetic field','g'];
+  for (i=0;i<graphDiv.data.length;i++){
+    title.push(graphDiv.data[i].name);
+  };
+  var data = [];
+  data[0]=title;
+  for (i=0;i<graphDiv.data[0].x.length;i++){
+    var temp = [Number(graphDiv.data[0].x[i]),Number(graphDiv.data[0].text[i])];
+    for (j=0;j<graphDiv.data.length;j++){
+      temp.push(Number(graphDiv.data[j].y[i]));
+    }
+    data[i+1] = temp;
+  };
+
+var data1 = "output from sw.pharma.hr/EPRSIM/visualEPR.html \n";
+for (i=0;i<data.length;i++){
+  data1 += data[i];
+  data1 += "\n";
+}
+var filename = document.getElementById('filename').value + ".csv";
+  //data.map(function(d){return d.join();}).join('\n')
+  download(filename, data1);
+}
+
+//function that enables file reader
+function readfile(){
+  //document.getElementById('introTxt').style.display = 'none';
+  //document.getElementById('introTxt1').style.display = 'block';
+  //console.log(document.getElementById("freqGHz").value);
+  var freq=Number(document.getElementById("freqGHz").value)*1000000000;
+  document.getElementById("freq").value=freq;
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    let texts1 = (fileReader.result);
+    viz_spectra(texts1,document.querySelector('#inputfile').files[0].name,freq);
+    }
+  fileReader.readAsText(document.querySelector('#inputfile').files[0]);
+}
+
+function readfile2(){
+  hide('big_input');show('graphDiv');show('manip_opt');hide('introTxt');show('introTxt1');
+  //document.getElementById('introTxt').style.display = 'none';
+  //document.getElementById('introTxt1').style.display = 'block';
+  //console.log(document.getElementById("freqGHz").value);
+  var freq=Number(document.getElementById("freqGHz").value)*1000000000;
+  document.getElementById("freq").value=freq;
+  let fileReader = new FileReader();
+  fileReader.onload = function () {
+    let texts1 = (fileReader.result);
+    viz_spectra(texts1,document.querySelector('#inputfile2').files[0].name,freq);
+    }
+  fileReader.readAsText(document.querySelector('#inputfile2').files[0]);
+}
+
+function readfile1(){
+  //console.log(document.getElementById("freqGHz").value);
+  freq1=Number(document.getElementById("freqGHz1").value)*1000000000;
+  document.getElementById("freq1").value=freq1;
+  let fileReader1 = new FileReader();
+  fileReader1.onload = function () {
+    let texts2 = (fileReader1.result);
+    viz_spectra(texts2,document.querySelector('#inputfile1').files[0].name,freq1);
+    }
+  fileReader1.readAsText(document.querySelector('#inputfile1').files[0]); 
+}
+
+//function that generates spectra from input
+function viz_spectra(texts1,filename,freq){
+  var texts1splt=texts1.split("\n");
+  var title=texts1splt.shift();
+  var blank=texts1splt.shift();
+  var orig_data = [];
+  for (i=0; i<texts1splt.length; i++){
+    orig_data.push(texts1splt[i].replace(/\s+/g, ' ').trim().split(" "));
+  }
+  var alldata = [];
+  var alllabels = [];
+
+  var smooth= document.getElementsByName("smooth")[0].value;
+  var smoothSAVGOL= document.getElementsByName("smoothSAVGOL")[0].value;
+  var noise=document.getElementsByName("noise")[0].value;
+  var orig_data_y = [];
+  var orig_data_x = [];
+  for (i=0;i<orig_data.length;i++){
+    orig_data_y.push(Number(orig_data[i][2]));
+    orig_data_x.push(Number(orig_data[i][1]));
+  }
+      alldata.push(orig_data);
+      alllabels.push({title:filename});
+  show_spectra(alldata,alllabels,freq);
+}
+
+annotations = [];
+
+//sectra generation function using Plotly
+
+
+function show_spectra(alldata,alllabels,freq){
+
+  //var freq = document.getElementById('freq').value;
+  var mu = document.getElementById('mu').value;
+  var ge = document.getElementById('ge').value;
+  var h = document.getElementById('h').value;
+
+  var data_viz = [];
+  for (i=0;i<alldata.length;i++){
+    var x_val=[];
+    var y_val=[];
+    var g_val=[];
+    for (j=0;j<alldata[i].length;j++){
+      x_val.push(alldata[i][j][1]);
+      y_val.push(alldata[i][j][2]);
+      g_val.push((h*freq/(alldata[i][j][1]*mu)).toPrecision(7));      
+    }
+    var trace = {
+      x: x_val,
+      y: y_val,
+      text: g_val,
+      mode: 'lines+markers',
+      marker: {size: 0.01},
+      type: 'scatter',
+      name: alllabels[i].title
+    };
+  data_viz.push(trace);
+  }
+
+  var config = {
+    displayModeBar: true,
+    toImageButtonOptions: {
+      format: "png", // one of png, svg, jpeg, webp
+      filename: "EPR_spectra",
+      height: 800,
+      width: 1200,
+      scale: 4 // Multiply title/legend/axis/canvas sizes by this factor
+    }
+  };
+
+  var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+  if (isEmpty == true){
+    Plotly.newPlot('graphDiv', data_viz, {showlegend: true, legend: {"orientation": 'h', xanchor: "center", x: 0.5, y: 1.1}, hovermode:'closest',annotations: annotations}, config);
+
+    var myPlot = document.getElementById('graphDiv');
+    myPlot.on('plotly_click', function(data_viz){
+      var pts = '';
+      for(var i=0; i < data_viz.points.length; i++){
+        if(annotations.length != 0){
+          var g = (h*freq/(data_viz.points[i].x*mu));
+
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+data_viz.points[i].text+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+          for (j=annotations.length;j>0;j--){
+            annotate_text += '<br>'+'dx('+(j-1)+'-'+(annotations.length)+') = '+Math.abs(annotations[j-1].x-data_viz.points[i].x).toPrecision(4) + " G<br>&nbsp;&nbsp;g<sub>avg</sub>("+(j-1)+"-"+(annotations.length)+") = "+((Number(data_viz.points[i].text)+Number(annotations[j-1].g))/2);
+          }
+                      }else{
+          var g = (h*freq/(data_viz.points[i].x*mu));
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+data_viz.points[i].text+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+                      }
+
+          annotation = {
+              arrowhead: 6,
+              ax: 0,
+              ay: -80,
+              bgcolor: 'rgba(255, 255, 255, 0.9)',
+              arrowcolor: 'black',
+              font: {size:12},
+              bordercolor: 'black',
+              borderwidth: 1,
+              borderpad: 1,
+            text: annotate_text,
+            x: data_viz.points[i].x,
+            y: parseFloat(data_viz.points[i].y.toPrecision(4)),
+            g: data_viz.points[i].text
+          }
+          //annotations += self.layout.annotations;
+          //annotations = self.layout.annotations || [];
+          annotations.push(annotation);
+          Plotly.relayout('graphDiv',{annotations: annotations})
+      }
+    });
+  } else {
+    Plotly.addTraces(graphDiv,data_viz);
+  }
+
+}
+
+function resetAnnot(){
+annotations.length=0;
+Plotly.relayout('graphDiv',{annotations: annotations});
+var dataRetrievedLater = graphDiv.data;
+var layoutRetrievedLater = graphDiv.layout;
+}
+
+function dwngraph(){
+var dataRetrievedLater = graphDiv.data;
+var layoutRetrievedLater = graphDiv.layout;
+var legend_show=document.getElementById("legend_show").checked;
+if(legend_show == false){
+  layoutRetrievedLater.showlegend = false;
+  layoutRetrievedLater.xaxis.showgrid = false;
+  layoutRetrievedLater.yaxis.showgrid = false;
+  layoutRetrievedLater.xaxis.zeroline = false;
+  layoutRetrievedLater.yaxis.zeroline = false;
+  layoutRetrievedLater.xaxis.ticks = 'outside';
+  layoutRetrievedLater.xaxis.showaxis = true;
+  layoutRetrievedLater.yaxis.showticklabels = false;  
+  layoutRetrievedLater.yaxis.ticks = '';
+  layoutRetrievedLater.xaxis.linewidth = 1;
+}else{
+  layoutRetrievedLater.showlegend = true;
+  layoutRetrievedLater.legend = {"orientation": 'h', "xanchor": "center", "x": 0.5, "y": 1.1};
+  layoutRetrievedLater.xaxis.showgrid = false;
+  layoutRetrievedLater.yaxis.showgrid = false;
+  layoutRetrievedLater.xaxis.zeroline = false;
+  layoutRetrievedLater.yaxis.zeroline = false;
+  layoutRetrievedLater.yaxis.showticklabels = false;  
+  layoutRetrievedLater.yaxis.ticks = '';
+  layoutRetrievedLater.xaxis.ticks = 'outside';
+  layoutRetrievedLater.xaxis.showaxis = true;
+  layoutRetrievedLater.xaxis.linewidth = 1;
+  console.log(layoutRetrievedLater);
+}
+Plotly.newPlot('graphDiv',dataRetrievedLater,layoutRetrievedLater);
+if (document.getElementById("png").checked == true){
+var PICtype = "png";
+} else {
+var PICtype = "svg";
+}
+var PICheight = document.getElementById("PICheight").value;
+var PICwidth = document.getElementById("PICwidth").value;
+var PICscale = document.getElementById("PICscale").value;
+var filename_graph = document.getElementById("filename_graph").value;
+Plotly.downloadImage(graphDiv, {format: PICtype, width: PICwidth, height: PICheight, scale: PICscale, filename: filename_graph});
+}
+
+var varXY = []; //array to hold the data to be plotted
+var varXYint = []; //array to hold 1st integrals
+var varXYdoubleint = []; //array to hold 2nd integrals
+
+
+function normalize(arr,norm){
+  var norm_arr = [];
+  orig_span=(_.max([Math.abs(_.max(arr)),Math.abs(_.min(arr))]));
+  for (i=0;i<arr.length;i++){
+    norm_arr.push(arr[i]/orig_span*norm);
+  }
+  return(norm_arr);
+}
+
+//EPR SIMULATION
+//r.push({percent: $("#percent"+ind).val(), g: $("#g"+ind).val(), width: $("#width"+ind).val(), lor: $("#lor"+ind).val(), equiv:[], spin:[], hfc:[]}); 
+
+function eprsim(){
+
+var r2 = [];
+var comp = simparam.children.length;
+var percent = [];
+var g = [];
+var lor = [];
+var width = [];
+for (i=0;i<comp;i++){
+var r2comp = {"percent":0,"g":0,"equiv":[],"hfc":[],"spin":[],"lor":0,"width":0,"intensity":1};
+r2comp.g=document.getElementsByName("gfactor")[i].value;
+r2comp.percent=Number(document.getElementsByName("percent")[i].value);
+r2comp.lor=document.getElementsByName("lor")[i].value;
+r2comp.width=document.getElementsByName("width")[i].value;
+var spinner_input = document.getElementById("spinners"+i);
+for(j=0;j<spinner_input.children.length;j++){
+for(k=0;k<spinner_input.children[j].children.length;k++){
+if (spinner_input.children[j].children[k].name == 'equiv'){
+  r2comp.equiv.push(spinner_input.children[j].children[k].value);
+}
+if (spinner_input.children[j].children[k].name == 'spin'){
+  r2comp.spin.push(spinner_input.children[j].children[k].value);
+}
+if (spinner_input.children[j].children[k].name == 'hfc'){
+  r2comp.hfc.push(spinner_input.children[j].children[k].value);
+}
+};
+};
+//console.log(spinner_input);
+r2.push(r2comp);
+}
+
+r1 = document.getElementById('eprsiminp').value;
+
+if (document.getElementById("texteprinput").style.display == "block"){
+  r=(JSON.parse(r1));
+} else {
+  r = r2;
+}
+
+document.getElementById('eprsiminp').value = JSON.stringify(r);
+
+var demo = "<div style='display: block'><br><h3>EPR simulation data:</h3>";
+/*
+demo += "Number of radicals: "+(r.length)+"<br>";
+for (i=0;i<r.length;i++){
+  demo += "&nbsp;&nbsp; Radical "+(i+1)+" with "+r[i].percent+"% ratio<br>";
+  demo += "&nbsp;&nbsp;&nbsp;&nbsp; g factor = "+r[i].g+"<br>";
+  demo += "&nbsp;&nbsp;&nbsp;&nbsp; Lorentzian component: "+r[i].lor+"%<br>";
+  demo += "&nbsp;&nbsp;&nbsp;&nbsp; Width: "+r[i].width+"%<br>"; 
+  demo += "&nbsp;&nbsp;&nbsp;&nbsp; No of nonequivalent atoms = "+r[i].equiv.length+"<br>";
+  for (j=0;j<r[i].equiv.length;j++){
+    demo += "&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; No of equivalent atoms = "+r[i].equiv[j]+"<br>";
+    demo += "&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Spin = "+r[i].spin[j]+"&nbsp;&nbsp; HFC = "+r[i].hfc[j]+"<br>";
+  }
+  demo += "<br>";
+}
+*/
+  demo += "Text input:<br>";
+  demo += JSON.stringify(r);
+  demo += "<br></div>";
+document.getElementById("demo").innerHTML = demo;
+
+
+var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+if (isEmpty == true){
+  hide('big_input');
+  show('graphDiv');
+  show('manip_opt');
+  document.getElementById('introTxt').style.display = 'none';
+  document.getElementById('introTxt1').style.display = 'block';
+No_integers=1024;
+} else {
+if (graphDiv.data.length == 0){
+No_integers=1024;
+} else {
+No_integers=graphDiv.data[graphDiv.data.length-1].x.length;  
+}
+}
+
+if(freqGHz2.value === ""){
+  freq = document.getElementById('freqGHz').value*1000000000;
+} else {
+  freq = document.getElementById('freqGHz2').value*1000000000;
+}
+mu = document.getElementById('mu').value;
+ge = document.getElementById('ge').value;
+h = document.getElementById('h').value;
+var finished = false;
+calculate();
+}
+
+function calculate() { //read data, parse, calculate and plot spectrum //FROM EPRSIMULATOR.ORG
+  var stick = new Array(r.length);
+  for (var i = 0; i<r.length; i++) {
+    stick[i] = stickspectrum(i);
+  }
+  var eprsimspectra = spectrum(stick);
+  var eprsimspectraname = ["simulation spectra","sim abs spectra","sim second integral"]
+  finished = true;
+
+
+var nosim = 0;
+
+
+if (Object.keys(graphDiv).length != 0){
+  for (i=0;i<graphDiv.data.length;i++){
+    if (graphDiv.data[i].name.startsWith('simulation') == true ){
+      nosim++
+    }
+  };
+}
+//console.log(graphDiv.data);
+
+
+var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+if (isEmpty == true){
+  norm = document.getElementById("intensity").value;
+} else {
+/*  var tracesMax = [];
+  var tracesMin = [];
+  for (i=0;i<graphDiv.data.length;i++){
+    tracesMax.push(_.max(graphDiv.data[i].y));
+    tracesMin.push(_.min(graphDiv.data[i].y));
+  }
+  var traceMax = Math.abs(_.max(tracesMax));
+  var traceMin = Math.abs(_.min(tracesMin));
+  var norm = _.max([traceMax,traceMin]); */
+  norm = document.getElementById("intensity").value;
+}
+
+  var data = [];
+  for (k=0; k<eprsimspectra.length;k++){
+    for (i=0;i<eprsimspectra[k].length;i++){
+      var x_val=[];
+      var y_val=[];
+      var g_val=[];
+      for (j=0;j<eprsimspectra[k][i].length;j++){
+        x_val.push(eprsimspectra[k][i][j][0]);
+        y_val.push(eprsimspectra[k][i][j][1]);
+        g_val.push((h*freq/(eprsimspectra[k][i][j][0]*mu)).toPrecision(7));      
+      }
+      var y_norm_val = normalize(y_val,norm);
+      var trace = {
+        x: x_val,
+        y: y_norm_val,
+        text: g_val,
+        mode: 'lines+markers',
+        marker: {size: 0.01},
+        type: 'scatter',
+        name: eprsimspectraname[k]+" "+nosim
+      };
+    data.push(trace);
+    }
+  }
+
+var data_viz = [];
+data_viz.push(data[0]);
+  var config = {
+    displayModeBar: true,
+    toImageButtonOptions: {
+      format: "png", // one of png, svg, jpeg, webp
+      filename: "EPR_spectra",
+      height: 800,
+      width: 1200,
+      scale: 4 // Multiply title/legend/axis/canvas sizes by this factor
+    }
+  };
+
+if (isEmpty == true){
+  Plotly.newPlot('graphDiv',data_viz, {showlegend: true, legend: {"orientation": 'h', xanchor: "center", x: 0.5, y: 1.1},hovermode:'closest',annotations: annotations}, config);
+      var myPlot = document.getElementById('graphDiv');
+    myPlot.on('plotly_click', function(data_viz){
+      var pts = '';
+      for(var i=0; i < data_viz.points.length; i++){
+        if(annotations.length != 0){
+          var g = (h*freq/(data_viz.points[i].x*mu));
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+Math.abs(g).toPrecision(7)+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+          for (j=annotations.length;j>0;j--){
+            annotate_text += '<br>'+'dx('+(j-1)+'-'+(annotations.length)+') = '+Math.abs(annotations[j-1].x-data_viz.points[i].x).toPrecision(4) + " G<br>&nbsp;&nbsp;g<sub>avg</sub>("+(j-1)+"-"+(annotations.length)+") = "+(((h*freq/(data_viz.points[i].x*mu))+(h*freq/(annotations[j-1].x*mu)))/2).toPrecision(7);
+          }
+                      }else{
+          var g = (h*freq/(data_viz.points[i].x*mu));
+          annotate_text = 'point '+annotations.length+"<br>"+'g = '+Math.abs(g).toPrecision(7)+"<br>"+
+                        'y = '+data_viz.points[i].y.toPrecision(4);
+                      }
+
+          annotation = {
+              arrowhead: 6,
+              ax: 0,
+              ay: -80,
+              x:80,
+              bgcolor: 'rgba(255, 255, 255, 0.9)',
+              arrowcolor: 'black',
+              font: {size:12},
+              bordercolor: 'black',
+              borderwidth: 1,
+              borderpad: 1,
+            text: annotate_text,
+            x: data_viz.points[i].x,
+            y: parseFloat(data_viz.points[i].y.toPrecision(4))
+          }
+          //annotations += self.layout.annotations;
+          //annotations = self.layout.annotations || [];
+          annotations.push(annotation);
+          Plotly.relayout('graphDiv',{annotations: annotations})
+      }
+    });
+} else {
+  if (graphDiv.data.length == 0){
+  Plotly.react('graphDiv',data_viz, {hovermode:'closest',annotations: annotations}, config);
+  }else{
+    for (i=0;i<graphDiv.data.length;i++){
+       if (graphDiv.data[i].name.startsWith('simulation') == true ){
+        Plotly.deleteTraces(graphDiv,i);
+      }
+    }
+   Plotly.addTraces(graphDiv,data_viz);
+  }
+}
+
+} //end function calculate
+
+
+function abspec(){
+  var stick = new Array(r.length);
+  for (var i = 0; i<r.length; i++) {
+    stick[i] = stickspectrum(i);
+  }
+  var eprsimspectra = spectrum(stick);
+  var eprsimspectraname = ["simulation spectra","sim abs. spectra","sim sec. integ."]
+  finished = true;
+  var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+if (isEmpty == true){
+  norm = 1;
+} else {
+  var tracesMax = [];
+  var tracesMin = [];
+  for (i=0;i<graphDiv.data.length;i++){
+    tracesMax.push(_.max(graphDiv.data[i].y));
+    tracesMin.push(_.min(graphDiv.data[i].y));
+  }
+  var traceMax = Math.abs(_.max(tracesMax));
+  var traceMin = Math.abs(_.min(tracesMin));
+  var norm = _.max([traceMax,traceMin]);
+}
+
+  var data = [];
+  for (k=0; k<eprsimspectra.length;k++){
+    for (i=0;i<eprsimspectra[k].length;i++){
+      var x_val=[];
+      var y_val=[];
+      var g_val=[];
+      for (j=0;j<eprsimspectra[k][i].length;j++){
+        x_val.push(eprsimspectra[k][i][j][0]);
+        y_val.push(eprsimspectra[k][i][j][1]);
+        g_val.push((h*freq/(eprsimspectra[k][i][j][0]*mu)).toPrecision(7));      
+      }
+      var y_norm_val = normalize(y_val,norm);
+      var trace = {
+        x: x_val,
+        y: y_norm_val,
+        text: g_val,
+        mode: 'lines+markers',
+        marker: {size: 0.01},
+        type: 'scatter',
+        name: eprsimspectraname[k]
+      };
+    data.push(trace);
+    }
+  }
+  var data_viz=[];
+  data_viz.push(data[1]);
+  //Plotly.addTraces(graphDiv,data_viz);
+    for (i=0;i<graphDiv.data.length;i++){
+       if (graphDiv.data[i].name.startsWith('sim abs') == true ){
+        Plotly.deleteTraces(graphDiv,i);
+      }
+    }
+   Plotly.addTraces(graphDiv,data_viz);
+}
+
+function doublint(){
+  var stick = new Array(r.length);
+  for (var i = 0; i<r.length; i++) {
+    stick[i] = stickspectrum(i);
+  }
+  var eprsimspectra = spectrum(stick);
+  var eprsimspectraname = ["simulation spectra","sim abs. spectra","sim sec. integ."]
+  finished = true;
+  var isEmpty = document.getElementById('graphDiv').innerHTML === "";
+if (isEmpty == true){
+  norm = 1;
+} else {
+  var tracesMax = [];
+  var tracesMin = [];
+  for (i=0;i<graphDiv.data.length;i++){
+    tracesMax.push(_.max(graphDiv.data[i].y));
+    tracesMin.push(_.min(graphDiv.data[i].y));
+  }
+  var traceMax = Math.abs(_.max(tracesMax));
+  var traceMin = Math.abs(_.min(tracesMin));
+  var norm = _.max([traceMax,traceMin]);
+}
+
+  var data = [];
+  for (k=0; k<eprsimspectra.length;k++){
+    for (i=0;i<eprsimspectra[k].length;i++){
+      var x_val=[];
+      var y_val=[];
+      var g_val=[];
+      for (j=0;j<eprsimspectra[k][i].length;j++){
+        x_val.push(eprsimspectra[k][i][j][0]);
+        y_val.push(eprsimspectra[k][i][j][1]);
+        g_val.push((h*freq/(eprsimspectra[k][i][j][0]*mu)).toPrecision(7));      
+      }
+      var y_norm_val = normalize(y_val,norm);
+      var trace = {
+        x: x_val,
+        y: y_norm_val,
+        text: g_val,
+        mode: 'lines+markers',
+        marker: {size: 0.01},
+        type: 'scatter',
+        name: eprsimspectraname[k]
+      };
+    data.push(trace);
+    }
+  }
+  var data_viz=[];
+  data_viz.push(data[2]);
+  //Plotly.addTraces(graphDiv,data_viz);
+      for (i=0;i<graphDiv.data.length;i++){
+       if (graphDiv.data[i].name.startsWith('sim sec') == true ){
+        Plotly.deleteTraces(graphDiv,i);
+      }
+    }
+   Plotly.addTraces(graphDiv,data_viz);
+}
+
+function stickspectrum(w) { //w is the component number //FROM EPRSIMULATOR.ORG
+
+  var stick = new Array(2); //returns stick spectrum array containing stick[0] is intensity and stick[1] is position
+  stick[0] = new Array();
+  stick[1] = new Array();
+  stick[0][0] = 1;
+  stick[1][0] = h*freq/(r[w].g*mu) //centre field
+
+  for (var j = 0; j < r[w].equiv.length; j++) { //loop through each type of nucleus
+    for (var i = stick[0].length-1; i >= 0; i--) { //loop through each peak and generate splitting pattern: split each peak into 2nI+1 lines, total intensity (2I+1)^n), separated by a hyperfine.
+      stick[0][i] /= Math.pow((2*r[w].spin[j]+1), r[w].equiv[j]); //intensity of the smallest multiplet component
+      stick[1][i] -= r[w].equiv[j]*r[w].spin[j]*r[w].hfc[j]; //position of the 1st line
+      for (var k = 0; k < 2*r[w].equiv[j]*r[w].spin[j]; k++) { //add 2I new lines with zero intensity
+        stick[1].splice(i+k+1, 0, stick[1][i]+r[w].hfc[j]*(k+1));
+        stick[0].splice(i+k+1, 0, 0);
+      }
+      for (var k = 0; k < r[w].equiv[j]; k++) {//calculate intensities in the splitting pattern for each nucleus of the same type
+        for (var m = i+2*r[w].spin[j]*k; m >= i; m--) {//now add intensities to the new lines; loop through each old line in reverse
+          for (var ii = 0; ii < 2*r[w].spin[j]; ii++) stick[0][m+ii+1] += stick[0][m];
+        }  
+      }
+    }
+  }
+  return stick;
+  console.log(stick);
+} // end function stickspectrum
+
+function spectrum (stick) {//calculates a spectrum from stick spectra and lineshapes.  //FROM EPRSIMULATOR.ORG
+  var xmin=Infinity, xmax=0;
+  for (var k = 0; k<r.length; k++) { //calculate the scale. width of the combined spectrum includes 10 times the peak-to-peak widths for all peaks.
+    xmin = Math.min(Math.min.apply(Math, stick[k][1])-10*r[k].width, xmin);
+    xmax = Math.max(Math.max.apply(Math, stick[k][1])+10*r[k].width, xmax);
+  }
+  var tmp = xmax-xmin;
+  xmax += tmp*0.05; //add padding so that very sharp lines are not too close to the edge
+  xmin -= tmp*0.05;
+  var step = (xmax-xmin)/(No_integers-1);
+
+  varXY[0] = [];
+  varXYint[0] = [];
+  varXYdoubleint[0] = [];
+  for (var i = 0; i < No_integers; i++) { //initialise arrays
+    varXY[0][i] = [];
+    varXY[0][i].push(xmin + step*i);
+    varXY[0][i].push(0);
+    varXYint[0][i] = [];
+    varXYint[0][i].push(varXY[0][i][0]);
+    varXYint[0][i].push(0);
+    varXYdoubleint[0][i] = [];
+    varXYdoubleint[0][i].push(varXY[0][i][0]);
+    varXYdoubleint[0][i].push(0);
+  }
+  for (var k = 0; k<r.length; k++) {//sum up all components
+    var sticks = new Array(No_integers); //array to hold the stick spectrum
+    for (var i = 0; i<stick[k][0].length; i++) {//put the stick lines into an empty spectrum
+      var j = Math.round((stick[k][1][i]-xmin)/step); //position of the line in the spectrum
+      sticks[j] = sticks[j]?sticks[j]+stick[k][0][i]:stick[k][0][i]; //intensity
+    }
+    var tmp = new Array(No_integers); //index of peaks
+    var ind = 0;
+    for (var i = 0;i<No_integers;i++) if (sticks[i]) { //build an index of peaks - speeds up calculations.
+      tmp[ind]=i;
+      ind++
+    }        
+    var tmpint = new Array(No_integers); //to hold integral for each component
+    var tmpdoubleint = new Array(No_integers); //to hold double integral for each component
+    for (var i = 0; i<No_integers;i++) tmpint[i]=0;
+    tmpdoubleint[0]=0;
+    var rwid = Number(r[k].width);//boosts performance
+    var rwid2 = Math.pow(rwid, 2);
+    var lortmp = Number(r[k].percent)*Number(r[k].lor)/100*Math.sqrt(3)/Math.PI; //multiplier for Lorentzian line; performance booster
+    var gaustmp = Number(r[k].percent)*(100-Number(r[k].lor))/100*Math.sqrt(2/Math.PI);  //multiplier for Gaussian line; performance booster
+    for (var i = 0; i < No_integers; i++) {//for every point, adds together intensities for each line - this need to be replaced with the convolution method!
+      for (var j = 0; j < ind; j++) { //compute contribution for each peak of each component
+        var delta = varXY[0][i][0]-varXY[0][tmp[j]][0];
+        var delta2 = Math.pow(delta, 2);
+        if ((rwid>step && Math.abs(-0.5*rwid-delta)<0.5*step) || (rwid<step && -0.5*rwid-delta>0 && -0.5*rwid-delta<step)) {//if width greater than increment and the max (e.g., stick position - 0.5*linewidth) is within half-step from the field position; or width is less than field increment, and the max is within the step above the field position: then as the centre corresponds to data point, min and max are on the opposite side, move max to left, min to right - otherwise intergals do not work.
+          varXY[0][i][1] += sticks[tmp[j]]*(lortmp*0.5/rwid2+gaustmp*2/Math.sqrt(Math.E)/rwid2); //add half-max for both Lor and Gaus lines
+        }
+        else if ((rwid>step && Math.abs(0.5*rwid-delta)<0.5*step) || (rwid<step && delta-0.5*rwid>0 && delta-0.5*rwid<step)) {//if width greater than increment and the min (e.g., stick position + 0.5*linewidth) is within half-step from the field position; or width is less than field increment, the min is within the step below the field position
+          varXY[0][i][1] -= sticks[tmp[j]]*(lortmp*0.5/rwid2+gaustmp*2/Math.sqrt(Math.E)/rwid2); //subtract half-max for both Lor and Gaus lines
+        } 
+        else varXY[0][i][1] += sticks[tmp[j]]*(gaustmp*(-4)/rwid/rwid2*delta*Math.exp(-2*delta2/rwid2)+lortmp*(-delta)*rwid/Math.pow((delta2+3/4*rwid2), 2)); //normal calculations for all other cases, Gaussian + Lorentzian
+        tmpint[i] += sticks[tmp[j]]*(gaustmp*Math.exp(-2*delta2/rwid2)/rwid + lortmp/2/rwid/(0.75+delta2/rwid2)) //Gaussian + Lorentzian integrals - calculated explicitly to avoid errors of integration
+      }
+    }
+    for (var j = 1; j < No_integers; j++) tmpdoubleint[j] = tmpdoubleint[j-1] + step*(tmpint[j]+tmpint[j-1])/2; //double integral
+    var i = tmpdoubleint[No_integers-1]/Number(r[k].percent); //how much integral is above theoretical (only happens for very sharp lines)
+    for (var j = 1; j < No_integers; j++) {
+      varXYdoubleint[0][j][1] += i>1?tmpdoubleint[j]/i:tmpdoubleint[j]; //if double integral is above theoretical, normalise it
+      varXYint[0][j][1] += tmpint[j];
+    }
+  }
+return([varXY,varXYint,varXYdoubleint]);
+} //end function spectrum
+
+
+function overlap(){
+var dataRetrievedLater = graphDiv.data;
+var newData = [];
+var layoutRetrievedLater = graphDiv.layout;
+var panorama = document.getElementById('panorama').value;
+//console.log(panorama);
+//console.log(dataRetrievedLater.length);
+for (j=0;j<dataRetrievedLater.length;j++){
+  var val = Number(j*panorama);
+  newval = baselineFuncSoloPan(dataRetrievedLater[j],val);
+  //newval = dataRetrievedLater[i];
+  newData.push(newval);
+}
+Plotly.react(graphDiv,newData,layoutRetrievedLater);
+}
+
+
+function overlap1(){
+var dataRetrievedLater = graphDiv.data;
+var newData = [];
+var layoutRetrievedLater = graphDiv.layout;
+var panorama = document.getElementById('panorama1').value;
+//console.log(panorama);
+//console.log(dataRetrievedLater.length);
+for (j=0;j<dataRetrievedLater.length;j++){
+  var val = Number(j*panorama);
+  console.log(val);
+  newval = baselineFuncSoloPan(dataRetrievedLater[j],val);
+  //newval = dataRetrievedLater[i];
+  newData.push(newval);
+}
+Plotly.react(graphDiv,newData,layoutRetrievedLater);
+}
+
+</script>
+
+</script>
+
+
+
+<!--
+<ul class="flex-container wrap" >
+<li class="flex-item">
+  <div id='demo'></div>
+  <br>
+</li>
+</ul>
+-->
+
+<div id="introTxt1" style="display:none;">
+  <hr>
+<ul class="flex-container wrap" >
+<li class="flex-item">
+    <p style="padding:10px;line-height: 1.6"><h6></h6>
+  <h3> INTRODUCTION </h3>
+  This is a web-based implementation for visualisation and analysis of EPR spectra. <br>
+  This software is predominatelly for fast overview visualization of spectra and basic analysis.<br> Example can be found here for <a href="example.ASCII" target="_blank">ASCII </a>file. For <a href="example.DTA" target="_blank">.DTA</a>, <a href="example.DSC" target="_blank">.DSC</a>, and <a href="example.YGF" target="_blank">.YGF<a> file follow the links.<br> 
+</p></li>
+<li class="flex-item">
+<p style="padding:10px;line-height: 1.6"><h6>
+  <h3> CREDITS </h3> This software was developed by <a href="https://scholar.google.com/citations?hl=en&user=BBURjcwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Davor Šakić</a>, Gabrijel Zubčić, Jiangyang You, and Erim Bešić. Simulation code was developed by <a href="https://www.york.ac.uk/chemistry/staff/academic/a-c/vchechik/" target="_blank">Victor Chechik</a> and can be found at <a href="https://www.eprsimulator.org" target="_blank">EPRsimulator</a>. Help from Valerije Vrček (discussion and testing) is greatly appreciated. For details about data formatting, export and possible updates, please contact <a href="mailto:dsakic@pharma.hr?subject=LIGHT-N-RING" target="_blank" rel="noopener noreferrer">Davor Šakić</a>.<br>
+  Funding: <a href="http://www.hrzz.hr" target="_blank">HRZZ</a>, <a href="http://light-n-ring.pharma.hr" target="_blank">LIGHT-N-RING</a>, 2023.<br>
+  Institution: <a href="http://www.pharma.unizg.hr" target="_blank">University of Zagreb, Faculty of Pharmacy and Biochemistry<br><br>
+  <img src="logo_fbf_unizg.png" alt="FBF UniZg" height=80></a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="http://www.hrzz.hr" target="_blank"><img src="hrzz_logo.png" alt="HRZZ" height=80></a>
+</p></li>
+<li class="flex-item">
+<p style="padding:10px;line-height: 1.6"><h6>
+  <h3> DISCLAIMER </h3> The software and results are provided "AS IS", without warranty of any kind, express or implied. In no event shall the authors or copyright holders be liable for any claim, damages or other liability. Good luck!
+    </p>
+</li>
+</ul>
+</div>
+
+
+</body>
+
+  <div class="footer">
+
+ <a href="http://sw.pharma.hr/light-n-ring" title="LIGHT-N-RING"><img src="logo-white.png" alt="LIGHT-N-RING" style="max-width: 350px" style="min-width: 350px" style="padding-left: 10px"></a>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+   &copy; 2021.-2023. <a href="http://sw.pharma.hr/light-n-ring" target="_blank">LIGHT-N-RING.</a> All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;<br>
+    Contact: <a href="mailto:dsakic@pharma.hr?subject=LIGHT-N-RING" target="_blank" rel="noopener noreferrer">Davor Šakić</a>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+
+  </div>
+
+</html>

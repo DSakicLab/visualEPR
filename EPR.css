@@ -1,0 +1,58 @@
+body { font-family: Verdana, Arial, sans-serif!important; font-size: 12px!important; min-width: 875px;}
+h1 {display: inline-block; line-height: 1.4em; margin-top: 0em; margin-bottom: 0;} /* so that page title is centred*/
+ul {padding: 0px; margin: 10px;}
+ul li {padding-bottom: 1em;}
+.ui-spinner {margin-right: 1.5em;} /*space out spinners*/
+.shortinput {width: 2em;} /*width of short spinners*/
+.longinput {width: 3.5em;}
+.menu-button + .ui-selectmenu-button {vertical-align: middle; font-weight: normal; height: 1.8em; margin-right: 2em;} /*align and space out nuclei selectmenu*/
+.menu-button + .ui-selectmenu-button .ui-selectmenu-text {padding-top: 0!important; color:black; margin-top: 0.2em;} /*to make selectmenu the same height as spinner*/
+.menu-button {width: 5em;} /* width of selectmenu*/
+.ui-menu .ui-state-focus {font-weight: normal!important} /*do not make focussed selector items bold so that they do not wrap*/
+.mainmenu + .ui-selectmenu-button {vertical-align: middle; margin-bottom: 0.5em; margin-left: 1em;} /*align and space out main menu*/
+.ui-button.nucbuttons {color:#DF3A01;} /*color of add/remove nuclei buttons*/
+.ui-button-text {-moz-user-select:-moz-none; -moz-user-select:none;-o-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none} /*so the toggle buttons cannnot be selected*/
+.overlay {border-style: none;}
+.ui-dialog .ui-resizable-se {
+    width: 14px!important;
+    height: 14px!important;
+    right: 3px!important;
+    bottom: 3px!important;
+    background-position: -80px -224px!important;
+} /*resize icon on dialogs */
+#home {margin-bottom: 0.5em; margin-left: 1em; margin-right: 1em;}
+#menu {height: 3.2em; background-color: #ccffff; color:blue;}
+#menu button {margin-bottom: 0.5em; margin-left: 1em;} /*buttons on the home page*/
+#plot {float: left;min-width: 700px; width: 75%; min-height: 400px; height: 70vh; margin-top: 10px;margin-bottom: 10px;}
+#props {float: left; width:165px; margin-left: 10px; margin-top: 10px;}
+#gfactor {position: absolute;display: none;border: 1px solid #fdd;background-color: #fee;padding: 2px;opacity: 0.80;}
+#distance {position: absolute;display: none;border: 1px solid #cdf;background-color: #def;padding: 2px;opacity: 0.80;}
+.ui-tooltip {max-width: 800px!important;} /*width of the tooltips*/
+span.question { /*to make help tooltips*/
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+  background-color: #89A4CC;
+  line-height: 16px;
+  color: White;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  vertical-align: top;
+  position: relative;
+}
+span.question:hover { background-color: #3D6199; }
+div.tooltip {
+  background-color: #3D6199;
+  color: White;
+  position: absolute;
+  left: 25px;
+  top: -25px;
+  z-index: 1000000;
+  width: 250px;
+  border-radius: 5px;
+  font-weight: normal!important;
+}
